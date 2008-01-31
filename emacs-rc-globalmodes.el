@@ -28,7 +28,7 @@
 (setq font-lock-maximum-decoration t)
 (show-paren-mode 1)
 (transient-mark-mode t)
-(which-func-mode t)
+(which-func-mode 0)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
