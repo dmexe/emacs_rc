@@ -119,7 +119,8 @@
   (local-set-key (kbd "<tab>") 'indent-and-complete)
   (local-set-key (kbd "<return>") 'my-javadoc-return)
   (local-set-key [f7] 'compile)
-  (local-set-key (kbd "C-t") 'switch-cpp-h))
+  (local-set-key (kbd "C-t") 'switch-cpp-h)
+  (hs-minor-mode t))
 
 (add-hook 'c-mode-hook (lambda ()
                          (my-c-mode-common-hook)
@@ -136,10 +137,13 @@
 (autoload 'php-mode "php-mode" "PHP editing mode." t)
 (autoload 'php-electric-mode "php-electric" "PHP electric mode." t)
 (autoload 'php-flymake-load "php-flymake" "PHP flymake mode." t)
+(autoload 'php-find-function-prototype "php-functions" "PHP functions" t)
 (autoload 'yaml-mode "yaml-mode" "YAML editing mode." t)
 (autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
 (autoload 'ecmascript-mode "ecmascript-mode" "Mode for editing ECMA Javascript files" t)
 (autoload 'javascript-generic-mode "generic-x" "Mode for editing Javascript files" t)
+
+
 (setq auto-mode-alist  (cons '("\\.php$" . php-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.css$" . css-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.js$" . ecmascript-mode) auto-mode-alist))
@@ -147,7 +151,6 @@
 
 (add-hook 'php-mode-hook
           (lambda()
-            (load-library "php-functions")
             (php-electric-mode 1)
             (php-flymake-load)
             (my-c-mode-common-hook)
