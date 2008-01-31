@@ -26,7 +26,7 @@
 ;; OSX only setup
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'super))
+  (setq mac-option-modifier 'meta))
 
 (global-set-key [f1] 'chm_lookup)
 (global-set-key [f9] 'svn-status)
