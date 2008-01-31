@@ -7,18 +7,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Emacs Server
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(server-start)
-(server-mode)
-; don't ask before kill a client buffer
-(remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
-
+(case system-type
+  ('darwin
+   (server-start))
+  (t
+   (server-mode)
+   ; don't ask before kill a client buffer
+   (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Session
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(desktop-save-mode 1)
-(setq desktop-dirname (expand-file-name "~/"))
-
+(unless (eq system-type 'darwin)
+  (desktop-save-mode 1)
+  (setq desktop-dirname (expand-file-name "~/.emacs.d/")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Font Lock Setup
@@ -28,8 +30,6 @@
 (setq font-lock-maximum-decoration t)
 (show-paren-mode 1)
 (transient-mark-mode t)
-;; (which-func-mode 0)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Recent Files
@@ -62,7 +62,8 @@
         (border-width   . 0)
         (menu-bar-lines . 0)
         (tool-bar-lines . 0)
-        (unsplittable   . t)))
+        (unsplittable   . t)
+        (background-color . "white")))
 
 (setq speedbar-indentation-width 2)
 
@@ -70,6 +71,9 @@
           (lambda()
             (local-set-key (kbd "<DEL>") 'speedbar-up-directory)
             (set (make-local-variable 'speedbar-show-unknown-files) t)))
+(add-hook 'speebar-after-create-hook
+          (lambda ()
+            (set-background-color "white")))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -83,11 +87,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Tramp Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'tramp)
+;(require 'tramp)
 ;; (setq tramp-backup-directory-alist backup-directory-alist)
 ;; (setq tramp-auto-save-directory backup-directory-alist)
-(setq tramp-verbose 1)
-(setq tramp-default-method "plink")
+;(setq tramp-verbose 1)
+;(setq tramp-default-method "plink")
 ;; (setq tramp-debug-buffer t)
 ;; (tramp-set-completion-function "ftp"
 ;;                                '((tramp-parse-netrc "~/.netrc"))
@@ -144,13 +148,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (ido-mode t)
 (add-to-list 'ido-ignore-buffers "\\*")
+(add-hook 'ido-setup-hook
+          #'(lambda ()
+              (define-key ido-completion-map "\t" 'ido-exit-minibuffer)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ispell Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq ispell-process-directory (expand-file-name "D:/local/Aspell/"))
-(setq ispell-program-name "D:/local/Aspell/bin/aspell")
+(case system-type
+  ('darwin
+   nil)
+  (t
+   (setq ispell-process-directory (expand-file-name "D:/local/Aspell/"))
+   (setq ispell-program-name "D:/local/Aspell/bin/aspell")))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -160,8 +171,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; predictive Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq load-path (cons (expand-file-name "~/.emacs.d/predictive") load-path))
+;;;*;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (setq load-path (cons (expand-file-name "~/.emacs.d/predictive") load-path))
 ;; (autoload 'predictive-mode "predictive" "Toggle Predictive Completion mode." t)
 ;; (setq completion-use-echo nil)
 ;; (setq predictive-use-auto-learn-cache t)
@@ -169,8 +180,8 @@
 ;; (setq predictive-dict-autosave-on-kill-buffer nil)
 ;; (add-hook 'text-mode-hook 'predictive-mode)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; uniqufy Setup
+;; Untabify Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
+(require 'untabify-file)

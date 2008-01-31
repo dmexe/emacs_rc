@@ -2,25 +2,31 @@
 ;; Key bind setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar safe-language-change-flag nil)
+;; Windows only setup
+(when (eq system-type 'windows-nt)
+  (defvar safe-language-change-flag nil)
+  (defun safe-language-change ()
+    (interactive)
+    (setq safe-language-change-flag (not safe-language-change-flag))
+    (when safe-language-change-flag
+      (toggle-input-method)
+      (w32-toggle-lock-key 'capslock)))
 
-(defun safe-language-change ()
-  (interactive)
-  (setq safe-language-change-flag (not safe-language-change-flag))
-  (when safe-language-change-flag
-    (toggle-input-method)
-    (w32-toggle-lock-key 'capslock)))
+  ;; skip to pass keys to windows
+  (setq w32-pass-alt-to-system nil)
+  (setq w32-pass-lwindow-to-system nil)
+  (setq w32-pass-rwindow-to-system nil)
+  (setq w32-pass-extra-mouse-buttons-to-system nil)
+  ;; (setq w32-enable-caps-lock t)
+  ;; (setq w32-enable-num-lock nil)
 
-; skip to pass keys to windows
-(setq w32-pass-alt-to-system nil)
-(setq w32-pass-lwindow-to-system nil)
-(setq w32-pass-rwindow-to-system nil)
-(setq w32-pass-extra-mouse-buttons-to-system nil)
-;; (setq w32-enable-caps-lock t)
-;; (setq w32-enable-num-lock nil)
+  ;; replace M-TAB to C-TAB
+  (define-key function-key-map [(control tab)] [?\M-\t]))
 
-; replace M-TAB to C-TAB
-(define-key function-key-map [(control tab)] [?\M-\t])
+;; OSX only setup
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'super))
 
 (global-set-key [f1] 'chm_lookup)
 (global-set-key [f9] 'svn-status)
@@ -30,7 +36,7 @@
 (global-set-key (kbd "\e\el") 'goto-line)
 (global-set-key (kbd "\e\ei") 'indent-region)
 (global-set-key (kbd "\e\ea") 'align)
-(global-set-key (kbd "\e\ee") 'flymake-display-err-menu-for-current-line)
+(global-set-key (kbd "\e\ev") 'my-vc-status)
 (global-set-key (kbd "\e\ems") 'eshell)
 (global-set-key (kbd "\e\eh") 'hs-toggle-hiding)
 (global-set-key (kbd "\e\ef") 'hs-hide-all)

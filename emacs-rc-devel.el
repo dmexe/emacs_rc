@@ -1,5 +1,5 @@
 ;; (eval-when-compile
-;; ;;   (require 'nxml-mode)
+;;  (require 'nxml-mode)
 ;;   (require 'css-mode)
 ;;   (require 'lua-mode)
 ;;   (require 'apache-mode))
@@ -142,8 +142,6 @@
 (autoload 'css-mode "css-mode" "Mode for editing CSS files" t)
 (autoload 'ecmascript-mode "ecmascript-mode" "Mode for editing ECMA Javascript files" t)
 (autoload 'javascript-generic-mode "generic-x" "Mode for editing Javascript files" t)
-
-
 (setq auto-mode-alist  (cons '("\\.php$" . php-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.css$" . css-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.js$" . ecmascript-mode) auto-mode-alist))
@@ -161,6 +159,7 @@
                                             (when sym
                                               (browse-url (concat "http://php.net/" sym))))))
             (local-set-key (kbd "<f2>") 'php-find-function-prototype)
+            (local-set-key (kbd "<f7>") 'php-lint)
             (local-set-key (kbd "<f12>") 'php-insert-phpdoc)
             (local-set-key (kbd "<C-f12>") 'php-insert-comment)))
 
@@ -179,7 +178,6 @@
 (autoload 'ruby-mode "ruby-mode" "Ruby editing mode." t)
 
 (require 'rails)
-(setq rails-chm-file "d:/ruby/rdoc.chm")
 (setq rails-use-ctags t)
 (setq rails-use-mongrel t)
 
@@ -363,9 +361,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq load-path (cons (expand-file-name "~/.emacs.d/git") load-path))
 (require 'git)
-(require 'git-blame)
 (require 'vc-git)
 (add-to-list 'vc-handled-backends 'GIT)
+
+(autoload 'git-blame-mode "git-blame"
+  "Minor mode for incremental blame for Git." t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Haml mode Setup
@@ -380,7 +380,6 @@
 (dolist (mode '(emacs-lisp-mode-hook
                 ruby-mode-hook
                 php-mode-hook
-                apache-mode-hook))
+                apache-mode-hook
+                ruby-mode-hook))
   (add-hook mode (lambda () (pabbrev-mode t))))
-
-

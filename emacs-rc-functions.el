@@ -2,7 +2,7 @@
 ;; Helper functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(load "~/.emacs.d/rails/trunk/rails-compat.el")
+;(load "rails-compat.el")
 
 (defun dos2unix ()
   (interactive)
@@ -67,6 +67,11 @@
    " * \n"
    " **/\n"))
 
+(defun php-lint ()
+  "Performs a PHP lint-check on the current file."
+  (interactive)
+  (shell-command (concat "d:/local/php5/php.exe -l " (buffer-file-name))))
+
 (defun emacs-ru-keyhelp ()
   "Help for emacs keys"
   (interactive)
@@ -103,6 +108,7 @@ unless return was pressed outside the comment"
               ;; there are some comment endings - search forward
               (if (search-forward "/*" last t)
                   't 'nil)
+
             ;; it's the only comment - search backward
             (goto-char last)
             (if (search-backward "/*" nil t)
@@ -119,10 +125,13 @@ unless return was pressed outside the comment"
         (insert "\n")
         (indent-for-tab-command)))))
 
-(defun my-upcase-mysql-tables ()
+(defun my-vc-status ()
   (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (query-replace-regexp "^\\(.*:?\\) TABLE \\(.*:?\\)`\\(.*:?\\)`\\(.*\\)" "\1 TABLE \2`\,(upcase \3)`\4")
-    (goto-char (point-min))
-    (query-replace-regexp "^INSERT INTO `\\(.*:?\\)` (" "INSERT INTO `\,(upcase \1)` (")))
+  (let ((file (buffer-file-name)))
+    (if (vc-registered file)
+        (let ((backend (vc-backend buffer-file-name)))
+          (case backend
+            (GIT (when (fboundp 'git-status) (git-status (directory-of-file file))))
+            (SVN (when (fboundp 'svn-status) (call-interactively 'svn-status)))
+            (t (message "Can't found status function for %s backend" backend))))
+      (message "Current file not registered in VC"))))
