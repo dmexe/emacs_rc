@@ -171,9 +171,17 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Perl Setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq auto-mode-alist  (cons '("\\.p\\(l\||lx\\|m\\)$" . cperl-mode) auto-mode-alist))
+(add-hook 'cperl-mode-hook
+          (lambda ()
+            (setq perl-indent-level 2)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ruby Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (setq load-path (cons (expand-file-name "~/.emacs.d/rails/trunk") load-path))
 (autoload 'ruby-mode "ruby-mode" "Ruby editing mode." t)
 
