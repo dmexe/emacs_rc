@@ -1,8 +1,6 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Key bind setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Windows only setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Windows Setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (when (eq system-type 'windows-nt)
   (defvar safe-language-change-flag nil)
   (defun safe-language-change ()
@@ -17,16 +15,24 @@
   (setq w32-pass-lwindow-to-system nil)
   (setq w32-pass-rwindow-to-system nil)
   (setq w32-pass-extra-mouse-buttons-to-system nil)
-  ;; (setq w32-enable-caps-lock t)
-  ;; (setq w32-enable-num-lock nil)
 
   ;; replace M-TAB to C-TAB
   (define-key function-key-map [(control tab)] [?\M-\t]))
 
-;; OSX only setup
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; OSX Setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (when (eq system-type 'darwin)
+  ;; skip to pass keys to system
   (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'meta))
+  (setq mac-option-modifier 'meta)
+  (setq mac-pass-command-to-system nil))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Key bind setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (global-set-key [f1] 'chm_lookup)
 (global-set-key [f9] 'svn-status)
@@ -58,13 +64,14 @@
 
 (global-set-key (kbd "<apps>") 'next-buffer)
 (global-set-key (kbd "<lwindow>") 'prev-buffer)
-(global-set-key (kbd "<language-change>") 'safe-language-change)
 
 (global-set-key (kbd "C-'") 'hippie-expand)
 
 (global-set-key (kbd "<C-f1>") 'emacs-ru-keyhelp)
 (global-set-key (kbd "<f8>") 'mmm-parse-buffer)
 
-(global-set-key (kbd "M-#") 'add-double-angle-quote-mark)
-
-;(w32-toggle-lock-key 'capslock 1)
+(case system-type
+  ('darwin
+   (global-set-key (kbd "M-SPC") 'toggle-input-method))
+  ('windows-nt
+   (global-set-key (kbd "<language-change>") 'safe-language-change)))

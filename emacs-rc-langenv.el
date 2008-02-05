@@ -46,5 +46,6 @@
   ('windows-nt
    (set-language-environment 'Cyrillic-CP1251))
   (t
-   (set-language-environment 'UTF-8))
-   (setq prefer-coding-system 'utf-8-unix))
+   (set-language-environment "Russian")
+   (set-default-coding-systems 'utf-8-unix)
+   (setq prefer-coding-system 'utf-8-unix)))
