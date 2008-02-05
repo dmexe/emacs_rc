@@ -36,7 +36,7 @@
 (setq c-basic-offset 2)
 (setq emacs-lisp-indent-offset 2)
 (setq-default indent-tabs-mode nil)
-(setq visible-bell t)
+(setq visible-bell nil)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq compilation-scroll-output t)
 (setq truncate-lines t)

@@ -18,9 +18,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Session
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(unless (eq system-type 'darwin)
-  (desktop-save-mode 1)
-  (setq desktop-dirname (expand-file-name "~/.emacs.d/")))
+(desktop-save-mode 1)
+(setq desktop-dirname (expand-file-name "~/.emacs.d/"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Font Lock Setup
