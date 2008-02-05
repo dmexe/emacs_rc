@@ -183,6 +183,7 @@
 ;; Ruby Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq load-path (cons (expand-file-name "~/.emacs.d/rails/trunk") load-path))
+(setq load-path (cons (expand-file-name "~/.emacs.d/ruby") load-path))
 (autoload 'ruby-mode "ruby-mode" "Ruby editing mode." t)
 
 (require 'rails)
