@@ -163,6 +163,11 @@
    '(ido-first-match ((t (:inherit 'font-lock-string-face))))
    '(ido-subdir ((t (:inherit 'font-lock-function-name-face))))
 
+   '(diff-indicator-removed ((t (:background "#3A65C2"))))
+   '(diff-removed ((t (:inherit 'diff-indicator-removed))))
+   '(diff-indicator-added ((t (:background "#139E07" :foreground "white"))))
+   '(diff-added ((t (:inherit 'diff-indicator-added))))
+
    '(minibuffer-noticeable-prompt ((t (:inherit 'font-lock-builtin-face :bold t))))
 
    '(mode-line ((t (:background "#EFEFEF"
