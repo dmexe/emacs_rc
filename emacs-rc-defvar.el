@@ -32,11 +32,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Default variables
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq inhibit-startup-message t) ;; don't display startup message
 (setq default-tab-width 2)
 (setq c-basic-offset 2)
 (setq emacs-lisp-indent-offset 2)
 (setq-default indent-tabs-mode nil)
-(setq visible-bell nil)
+(setq visible-bell t)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq compilation-scroll-output t)
 (setq truncate-lines t)
