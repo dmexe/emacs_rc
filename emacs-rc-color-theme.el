@@ -106,6 +106,7 @@
    '(completion-dynamic-face ((t (:inherit 'font-lock-preprocessor-face))))
    '(highlight ((t (:inherit 'font-lock-preprocessor-face))))))
 
+;; based on the idleFingers Textmate theme
 (defun color-theme-textmate2()
   (interactive)
   (color-theme-arjen)
