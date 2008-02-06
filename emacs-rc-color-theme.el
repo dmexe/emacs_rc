@@ -163,9 +163,11 @@
    '(ido-first-match ((t (:inherit 'font-lock-string-face))))
    '(ido-subdir ((t (:inherit 'font-lock-function-name-face))))
 
-   '(diff-indicator-removed ((t (:background "#3A65C2"))))
+   '(diff-header ((t (:background "#3A65C2"))))
+   '(diff-file-header ((t (:background "#5A85E2"))))
+   '(diff-indicator-removed ((t (:background "#EB3A3A"))))
    '(diff-removed ((t (:inherit 'diff-indicator-removed))))
-   '(diff-indicator-added ((t (:background "#139E07" :foreground "white"))))
+   '(diff-indicator-added ((t (:background "#33AE27" :foreground "white"))))
    '(diff-added ((t (:inherit 'diff-indicator-added))))
 
    '(minibuffer-noticeable-prompt ((t (:inherit 'font-lock-builtin-face :bold t))))
