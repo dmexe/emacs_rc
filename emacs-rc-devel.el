@@ -297,7 +297,7 @@
 
 (setq hippie-expand-try-functions-list
       (cons 'yas/hippie-try-expand hippie-expand-try-functions-list))
-(yas/initialize)
+;; (yas/initialize)
 ;; (yas/load-directory "~/.emacs.d/yasnippet/snippets/text-mode")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
