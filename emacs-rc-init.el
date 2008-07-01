@@ -1,6 +1,8 @@
 (when (eq system-type 'darwin)
   (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH"))))
 
+(require 'cl)
+
 (load-library "emacs-rc-defvar")
 (load-library "emacs-rc-color-theme")
 (load-library "emacs-rc-langenv")

@@ -5,9 +5,8 @@
 ;; based on the idleFingers Textmate theme
 (defun color-theme-dimaexe()
   (interactive)
-  (color-theme-arjen)
   (custom-set-faces
-   '(default ((t (:background "#2B2B2B"))))
+   '(default ((t (:background "#2B2B2B" :foreground "white"))))
    '(match ((t :background "#4A6152")))
    '(cursor ((t (:background "#FFFB7B"))))
    '(region ((t :background "#505C74")))
@@ -56,9 +55,11 @@
    '(nxml-comment-delimiter-face ((t (:inherit 'font-lock-comment-face))))
    '(nxml-comment-content-face ((t (:inherit 'font-lock-comment-face))))
 
+   ; ido
    '(ido-first-match ((t (:inherit 'font-lock-string-face))))
    '(ido-subdir ((t (:inherit 'font-lock-function-name-face))))
 
+   ; diff
    '(diff-header ((t (:background "#3A65C2"))))
    '(diff-file-header ((t (:background "#5A85E2"))))
    '(diff-indicator-removed ((t (:background "#EB3A3A"))))
@@ -66,6 +67,7 @@
    '(diff-indicator-added ((t (:background "#33AE27" :foreground "white"))))
    '(diff-added ((t (:inherit 'diff-indicator-added))))
 
+   ; modeline nad minibuffer
    '(minibuffer-noticeable-prompt ((t (:inherit 'font-lock-builtin-face :bold t))))
 
    '(mode-line ((t (:background "#EFEFEF"
@@ -90,5 +92,4 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Load color-theme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'color-theme)
 (color-theme-dimaexe)
