@@ -39,16 +39,24 @@
                    nil)))
   (hs-minor-mode arg))
 
+(defun nxml-hippie-try-expand (first-run)
+  (run-hook-with-args-until-success 'nxml-completion-hook))
+
 (add-hook 'nxml-mode-hook
           (lambda()
             (nxml-hs-minor-mode t)
             (setq nxml-child-indent 2)
             (setq nxml-auto-insert-xml-declaration-flag t)
             (setq nxml-slash-auto-complete-flag t)
+            (set
+             (make-local-variable 'hippie-expand-try-functions-list)
+             (cons
+              'yas/hippie-try-expand
+              (cons 'nxml-hippie-try-expand
+                    (cdr hippie-expand-try-functions-list))))
             (local-set-key (kbd "<return>") 'newline-and-indent)
             (define-abbrev nxml-mode-abbrev-table "table" ""
               '(lambda() (snippet-insert "<table>$.</table>")))))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Apache Setup
@@ -73,7 +81,10 @@
             (imenu-add-to-menubar "IMENU")
             (set
              (make-local-variable 'hippie-expand-try-functions-list)
-             (cons 'try-complete-lisp-symbol hippie-expand-try-functions-list))
+             (cons
+              'yas/hippie-try-expand
+              (cons 'try-complete-lisp-symbol
+                    (cdr hippie-expand-try-functions-list))))
             (local-set-key (kbd "<return>") 'newline-and-indent)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -162,7 +173,7 @@
           (lambda()
             (set (make-local-variable 'tab-width) 2)))
 
-(setq load-path (cons (expand-file-name "~/.emacs.d/emacs-rails") load-path))
+(setq load-path (cons (expand-file-name "~/.emacs.d/rails-reloaded") load-path))
 (require 'rails-autoload)
 
 
@@ -207,11 +218,6 @@
     :back "</style>")))
 
 (add-to-list 'mmm-mode-ext-classes-alist '(html-mode nil fancy-html))
-
-(add-hook 'sgml-mode-hook
-          (lambda()
-            (mmm-mode-on)
-            (local-set-key (kbd "<return>") 'newline-and-indent)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Java Setup
@@ -284,6 +290,17 @@
 (setq load-path (cons (expand-file-name "~/.emacs.d/haml") load-path))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; YASnippet
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq load-path (cons (expand-file-name "~/.emacs.d/yasnippet") load-path))
+(require 'yasnippet)
+
+(setq hippie-expand-try-functions-list
+      (cons 'yas/hippie-try-expand hippie-expand-try-functions-list))
+(yas/initialize)
+;; (yas/load-directory "~/.emacs.d/yasnippet/snippets/text-mode")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Pabbrev setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (autoload 'pabbrev-mode "pabbrev")
@@ -303,4 +320,5 @@
                 php-mode-hook
                 apache-mode-hook))
   (add-hook mode (lambda ()
-                    (local-set-key (kbd "<tab>") 'indent-according-to-mode))))
+                    (local-set-key (kbd "<tab>") 'indent-for-tab-command))))
+

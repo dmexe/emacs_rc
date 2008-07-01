@@ -11,3 +11,6 @@
 (load-library "emacs-rc-devel")
 (load-library "emacs-rc-compile")
 (load-library "emacs-rc-keys")
+
+(when (fboundp 'yas/define-snippets)
+  (load-library "emacs-rc-yasnippets.el"))

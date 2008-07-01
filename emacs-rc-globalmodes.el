@@ -173,17 +173,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Indent modification
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my/yasnippet-p (ov)
+  (overlay-get ov 'yas/snippet))
+
+(defun my/do-inside-yasnippet-p ()
+  (when (or (find-if 'my/yasnippet-p (overlays-at (point)))
+            (find-if 'my/yasnippet-p (overlays-at (- (point) 1))))
+    (yas/next-field-group)
+    t))
+
 (defadvice indent-according-to-mode (around indent-and-complete activate)
-  (cond
-   ;; snippet
-   ((and (boundp 'snippet)
-         snippet)
-    (snippet-next-field))
+  (unless (my/do-inside-yasnippet-p)
+    ;; completing
+    (when (looking-at "\\_>")
+      (hippie-expand nil))
+    ;; always indent line
+    ad-do-it))
 
-   ;; hippie-expand
-   ((looking-at "\\_>")
-    (hippie-expand nil)))
-
-  ;; always indent line
-  ad-do-it)
-
+; (ad-deactivate 'indent-according-to-mode)

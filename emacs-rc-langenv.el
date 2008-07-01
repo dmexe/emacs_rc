@@ -1,25 +1,4 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Fonts Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(when (eq system-type 'darwin)
-  (setq default-frame-alist
-        '((top . 42) (left . 160)
-          (width . 120) (height . 40)
-          (foreground-color . "white")
-          (background-color . "#2B2B2B")
-          (font . "-apple-monaco-medium-r-normal--13-160-72-72-m-160-iso10646-1")))
-  (setq initial-frame-alist
-        '((top . 42) (left . 160)
-          (width . 120) (height . 40))))
-
-(case system-type
-  (darwin
-   (set-default-font "-apple-monaco-medium-r-normal--13-160-72-72-m-160-iso10646-1"))
-  (t
-   (set-default-font "-outline-Consolas-normal-r-normal-normal-13-*-96-96-c-*-iso10646-1")))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Language Environment CP1251
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (when (eq system-type 'windows-nt)

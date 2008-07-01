@@ -1,4 +1,26 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Frames Setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(when (eq system-type 'darwin)
+  (setq default-frame-alist
+        '((top . 42) (left . 160)
+          (width . 120) (height . 40)
+          (foreground-color . "white")
+          (background-color . "#202020")
+          (font . "-apple-monaco-medium-r-normal--13-160-72-72-m-160-iso10646-1")))
+  (setq initial-frame-alist
+        '((top . 42) (left . 160)
+          (width . 120) (height . 40))))
+
+(case system-type
+  (darwin
+   (set-default-font "-apple-monaco-medium-r-normal--13-160-72-72-m-160-iso10646-1"))
+  (t
+   (set-default-font "-outline-Consolas-normal-r-normal-normal-13-*-96-96-c-*-iso10646-1")))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Default colors left
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -6,10 +28,10 @@
 (defun color-theme-dimaexe()
   (interactive)
   (custom-set-faces
-   '(default ((t (:background "#2B2B2B" :foreground "white"))))
+   '(default ((t (:background "#202020" :foreground "white"))))
    '(match ((t :background "#4A6152")))
    '(cursor ((t (:background "#FFFB7B"))))
-   '(region ((t :background "#505C74")))
+   '(region ((t :background "#303C54")))
    '(font-lock-comment-face ((t (:italic t :foreground "#B150E7"))))
    '(font-lock-string-face ((t (:foreground "#A5F26E"))))
    '(font-lock-keyword-face ((t (:foreground "#DC762A")))) ;; #CC7832"
@@ -93,3 +115,4 @@
 ;; Load color-theme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (color-theme-dimaexe)
+
