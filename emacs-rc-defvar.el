@@ -51,14 +51,6 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Save buffer position
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'saveplace)
-(set-default 'save-place t)
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PC style selection
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -89,5 +81,6 @@
 ;; Setup grep for Windows
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq grep-find-command '("gfind . -type f -exec grep -nH -e  {} NUL \";\"" . 34))
-(setq grep-find-template "gfind . <X> -type f <F> -exec grep <C> -nH -e <R> {} NUL \";\"")
+(when (eq system-type 'windows-nt)
+  (setq grep-find-command '("gfind . -type f -exec grep -nH -e  {} NUL \";\"" . 34))
+  (setq grep-find-template "gfind . <X> -type f <F> -exec grep <C> -nH -e <R> {} NUL \";\""))

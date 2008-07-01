@@ -34,7 +34,6 @@
 ;; Key bind setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(global-set-key [f1] 'chm_lookup)
 (global-set-key [f9] 'svn-status)
 (global-set-key [f11] 'speedbar-get-focus)
 (global-set-key [f4] 'kill-this-buffer)
@@ -64,8 +63,6 @@
 
 (global-set-key (kbd "<apps>") 'next-buffer)
 (global-set-key (kbd "<lwindow>") 'prev-buffer)
-
-(global-set-key (kbd "C-'") 'hippie-expand)
 
 (global-set-key (kbd "<C-f1>") 'emacs-ru-keyhelp)
 (global-set-key (kbd "<f8>") 'mmm-parse-buffer)

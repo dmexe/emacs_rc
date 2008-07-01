@@ -18,8 +18,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Session
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(desktop-save-mode 1)
-(setq desktop-dirname (expand-file-name "~/.emacs.d/"))
+;; (desktop-save-mode 1)
+;; (setq desktop-dirname (expand-file-name "~/.emacs.d/"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Font Lock Setup
@@ -31,25 +31,16 @@
 (transient-mark-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Save buffer position
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'saveplace)
+(set-default 'save-place t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Recent Files
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'recentf)
 (recentf-mode 1)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Auto-Header Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'auto-header)
-(header-set-entry "datetime" "$DateTime:$" "")
-(header-set-entry "pauthor" "$Author:$" "")
-(header-set-entry "headurl" "$HeadURL:$" "")
-(header-set-entry "cvsid" "$Id:$" "")
-(setq header-field-list (quote (filename author created modified modified_by cvsid)))
-(add-to-list 'header-comment-strings '(php-mode . ("/*"   "*/"    " *"   "*")))
-(setq header-line-width 85)
-(setq header-full-name user-full-name)
-(setq header-email-address user-mail-address)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SpeedBar Setup
@@ -84,20 +75,6 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Tramp Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;(require 'tramp)
-;; (setq tramp-backup-directory-alist backup-directory-alist)
-;; (setq tramp-auto-save-directory backup-directory-alist)
-;(setq tramp-verbose 1)
-;(setq tramp-default-method "plink")
-;; (setq tramp-debug-buffer t)
-;; (tramp-set-completion-function "ftp"
-;;                                '((tramp-parse-netrc "~/.netrc"))
-;;                                )
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Dired Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'dired-load-hook ; dired setup to use single buffer
@@ -110,7 +87,6 @@
             (define-key dired-mode-map [mouse-1] 'joc-dired-single-buffer-mouse)
             (define-key dired-mode-map (kbd "<DEL>")
               #'(lambda () (interactive) (joc-dired-single-buffer "..")))))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Auto-Insert Setup
@@ -137,10 +113,10 @@
 ;; Hippie-Expand Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq hippie-expand-try-functions-list
-      '(try-complete-abbrev
+      '(
+        ;try-complete-abbrev
         try-expand-dabbrev
         try-expand-dabbrev-all-buffers))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ido Setup
@@ -168,19 +144,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq imenu-use-popup-menu t)
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; predictive Setup
-;;;*;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (setq load-path (cons (expand-file-name "~/.emacs.d/predictive") load-path))
-;; (autoload 'predictive-mode "predictive" "Toggle Predictive Completion mode." t)
-;; (setq completion-use-echo nil)
-;; (setq predictive-use-auto-learn-cache t)
-;; (setq predictive-dict-autosave nil)
-;; (setq predictive-dict-autosave-on-kill-buffer nil)
-;; (add-hook 'text-mode-hook 'predictive-mode)
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Untabify Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -206,3 +169,21 @@
                            php-mode nxml-mode
                            ruby-mode))
       (indent-region (region-beginning) (region-end) nil)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Indent modification
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defadvice indent-according-to-mode (around indent-and-complete activate)
+  (cond
+   ;; snippet
+   ((and (boundp 'snippet)
+         snippet)
+    (snippet-next-field))
+
+   ;; hippie-expand
+   ((looking-at "\\_>")
+    (hippie-expand nil)))
+
+  ;; always indent line
+  ad-do-it)
+

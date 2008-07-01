@@ -131,7 +131,9 @@ unless return was pressed outside the comment"
     (if (vc-registered file)
         (let ((backend (vc-backend buffer-file-name)))
           (case backend
-            (GIT (when (fboundp 'git-status) (git-status (directory-of-file file))))
-            (SVN (when (fboundp 'svn-status) (call-interactively 'svn-status)))
+            (GIT (when (fboundp 'git-status)
+                   (git-status (file-name-directory file))))
+            (SVN (when (fboundp 'svn-status)
+                   (call-interactively 'svn-status)))
             (t (message "Can't found status function for %s backend" backend))))
       (message "Current file not registered in VC"))))

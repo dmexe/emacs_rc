@@ -1,11 +1,3 @@
-;; (eval-when-compile
-;;  (require 'nxml-mode)
-;;   (require 'css-mode)
-;;   (require 'lua-mode)
-;;   (require 'apache-mode))
-
-(require 'snippet)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C Indenting Styles
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -21,14 +13,9 @@
 (setq align-c++-modes (quote (c++-mode c-mode java-mode php-mode cperl-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Text-mode setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'text-mode-hook #'(lambda()
-                              (local-set-key (kbd "<tab>") 'indent-and-complete)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; XML Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq nxml-mode-abbrev-table (make-abbrev-table))
 (load "~/.emacs.d/nxml-mode/rng-auto.el")
 (add-to-list 'auto-mode-alist '("\\.xml$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.xsd$" . nxml-mode))
@@ -38,15 +25,6 @@
 (add-to-list 'auto-mode-alist '("\\.xslt$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.svg$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.rss$" . nxml-mode))
-
-(defun nxml-indent-and-complete ()
-  (interactive)
-     ;; hippie-expand
-  (when (looking-at "\\_>")
-    (flet ((message (format-string &rest args) nil)
-           (ding (&optional arg) nil))
-      (nxml-complete)))
-  (indent-for-tab-command))
 
 (defun nxml-hs-minor-mode (&rest arg)
   (interactive "P")
@@ -68,7 +46,8 @@
             (setq nxml-auto-insert-xml-declaration-flag t)
             (setq nxml-slash-auto-complete-flag t)
             (local-set-key (kbd "<return>") 'newline-and-indent)
-            (local-set-key (kbd "<tab>") 'nxml-indent-and-complete)))
+            (define-abbrev nxml-mode-abbrev-table "table" ""
+              '(lambda() (snippet-insert "<table>$.</table>")))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -94,11 +73,7 @@
             (imenu-add-to-menubar "IMENU")
             (set
              (make-local-variable 'hippie-expand-try-functions-list)
-             '(try-complete-abbrev
-               try-complete-lisp-symbol
-               try-expand-dabbrev
-               try-expand-dabbrev-all-buffers))
-            (local-set-key (kbd "<tab>") 'indent-and-complete)
+             (cons 'try-complete-lisp-symbol hippie-expand-try-functions-list))
             (local-set-key (kbd "<return>") 'newline-and-indent)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -116,7 +91,6 @@
   (set (make-local-variable 'indent-tabs-mode) 'nil)
   (set (make-local-variable 'tab-width) 2)
   (set (make-local-variable 'c-basic-offset) 2)
-  (local-set-key (kbd "<tab>") 'indent-and-complete)
   (local-set-key (kbd "<return>") 'my-javadoc-return)
   (local-set-key [f7] 'compile)
   (local-set-key (kbd "C-t") 'switch-cpp-h)
@@ -129,7 +103,6 @@
 (add-hook 'c++-mode-hook (lambda ()
                            (my-c-mode-common-hook)
                            (cwarn-mode)))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PHP, JavaScript, CSS Setup, YAML
@@ -182,17 +155,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ruby Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq load-path (cons (expand-file-name "~/.emacs.d/rails/trunk") load-path))
 (setq load-path (cons (expand-file-name "~/.emacs.d/ruby") load-path))
 (autoload 'ruby-mode "ruby-mode" "Ruby editing mode." t)
-
-(require 'rails)
-(setq rails-use-ctags t)
-(setq rails-use-mongrel t)
 
 (add-hook 'ruby-mode-hook
           (lambda()
             (set (make-local-variable 'tab-width) 2)))
+
+(setq load-path (cons (expand-file-name "~/.emacs.d/emacs-rails") load-path))
+(require 'rails-autoload)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HTML/mmm-mode setup
@@ -228,77 +200,18 @@
     :front "<script[^>]*type=\"text/javascript\"[^>]*"
     :back "</script>")
 
-;;    (html-js-attribute
-;;     :submode javascript-generic-mode
-;;     :face mmm-declaration-submode-face
-;;     :front "\\bon\\w+=\""
-;;     :back "\"")
-
    (html-css-embeded
     :submode css-mode
     :face mmm-code-submode-face
     :front "<style[^>]*type=\"text/css\"[^>]*>"
-    :back "</style>")
-
-;;    (html-css-attribute
-;;     :submode css-mode
-;;     :face mmm-declaration-submode-face
-;;     :front "\\bstyle=\\s-*\""
-;;     :back "\"")
-))
+    :back "</style>")))
 
 (add-to-list 'mmm-mode-ext-classes-alist '(html-mode nil fancy-html))
 
 (add-hook 'sgml-mode-hook
           (lambda()
             (mmm-mode-on)
-            (local-set-key (kbd "<tab>") 'indent-and-complete)
             (local-set-key (kbd "<return>") 'newline-and-indent)))
-
-(add-hook 'html-mode-hook
-          (lambda()
-            (define-abbrev html-mode-abbrev-table "table" ""
-              '(lambda() (snippet-insert "<table>$.</table>")))
-            (define-abbrev html-mode-abbrev-table "tr" ""
-              '(lambda() (snippet-insert "<tr>$.</tr>")))
-            (define-abbrev html-mode-abbrev-table "th" ""
-              '(lambda() (snippet-insert "<th>$.</th>")))
-            (define-abbrev html-mode-abbrev-table "td" ""
-              '(lambda() (snippet-insert "<td>$.</td>")))
-            (define-abbrev html-mode-abbrev-table "ul" ""
-              '(lambda() (snippet-insert "<ul>$.</ul>")))
-            (define-abbrev html-mode-abbrev-table "li" ""
-              '(lambda() (snippet-insert "<li>$.</li>")))
-            (define-abbrev html-mode-abbrev-table "h1" ""
-              '(lambda() (snippet-insert "<h1>$.</h1>")))
-            (define-abbrev html-mode-abbrev-table "h2" ""
-              '(lambda() (snippet-insert "<h2>$.</h2>")))
-            (define-abbrev html-mode-abbrev-table "h3" ""
-              '(lambda() (snippet-insert "<h3>$.</h3>")))
-            (define-abbrev html-mode-abbrev-table "h6" ""
-              '(lambda() (snippet-insert "<h6>$.</h6>")))
-            (define-abbrev html-mode-abbrev-table "form" ""
-              '(lambda() (snippet-insert "<form method=\"$${post}\">$.</form>")))
-            (define-abbrev html-mode-abbrev-table "input" ""
-              '(lambda() (snippet-insert "<input type=\"$${text}\" name=\"$${name}\" value=\"$${value}\" />")))
-            (define-abbrev html-mode-abbrev-table "br" ""
-              '(lambda() (snippet-insert "<br />")))
-            (define-abbrev html-mode-abbrev-table "label" ""
-              '(lambda() (snippet-insert "<label></label>")))
-            (define-abbrev html-mode-abbrev-table "div" ""
-              '(lambda() (snippet-insert "<div>$.</div>")))
-            (define-abbrev html-mode-abbrev-table "span" ""
-              '(lambda() (snippet-insert "<span>$.</span>")))
-            (define-abbrev html-mode-abbrev-table "a" ""
-              '(lambda() (snippet-insert "<a href=\"$${http://}\">$.</a>")))
-            (define-abbrev html-mode-abbrev-table "img" ""
-              '(lambda() (snippet-insert "<img src=\"$${http://}\">$.</img>")))
-
-            (define-abbrev html-mode-abbrev-table "php" ""
-              '(lambda() (snippet-insert "<?php $. ?>")))
-            (define-abbrev html-mode-abbrev-table "echo" ""
-              '(lambda() (snippet-insert "<?= $. ?>")))))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Java Setup
@@ -342,8 +255,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SQL Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (autoload 'sql-mode "sql-mode" nil t)
-;; (add-to-list 'auto-mode-alist '("\\.sql\\'"   . sql-mode))
 (add-hook 'sql-mode-hook
           (lambda()
             (setq sql-mysql-options '("-C" "-t" "-f" "-n"))
@@ -354,7 +265,6 @@
             (setq imenu-generic-expression sql-imenu-generic-expression
                   imenu-case-fold-search t)
             (imenu-add-to-menubar "IMENU")
-            (local-set-key (kbd "<tab>") 'indent-and-complete)
             (local-set-key (kbd "<return>") 'newline-and-indent)))
 
 
@@ -389,6 +299,16 @@
 (dolist (mode '(emacs-lisp-mode-hook
                 ruby-mode-hook
                 php-mode-hook
-                apache-mode-hook
-                ruby-mode-hook))
+                apache-mode-hook))
   (add-hook mode (lambda () (pabbrev-mode t))))
+
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;; Tab setup
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(dolist (mode '(emacs-lisp-mode-hook
+                ruby-mode-hook
+                php-mode-hook
+                apache-mode-hook))
+  (add-hook mode (lambda ()
+                    (local-set-key (kbd "<tab>") 'indent-according-to-mode))))

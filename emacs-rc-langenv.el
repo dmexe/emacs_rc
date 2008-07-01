@@ -19,7 +19,6 @@
   (t
    (set-default-font "-outline-Consolas-normal-r-normal-normal-13-*-96-96-c-*-iso10646-1")))
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Language Environment CP1251
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -48,5 +47,4 @@
    (set-language-environment 'Cyrillic-CP1251))
   (t
    (set-language-environment "Russian")
-   (set-default-coding-systems 'utf-8-unix)
-   (setq prefer-coding-system 'utf-8-unix)))
+   (set-default-coding-systems 'utf-8-unix)))
