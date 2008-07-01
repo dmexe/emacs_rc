@@ -137,3 +137,4 @@ unless return was pressed outside the comment"
                    (call-interactively 'svn-status)))
             (t (message "Can't found status function for %s backend" backend))))
       (message "Current file not registered in VC"))))
+
