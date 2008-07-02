@@ -9,6 +9,8 @@
 (load-library "emacs-rc-functions")
 (load-library "emacs-rc-globalmodes")
 (load-library "emacs-rc-devel")
+(load-library "emacs-rc-webdev")
+(load-library "emacs-rc-ruby")
 (load-library "emacs-rc-compile")
 (load-library "emacs-rc-keys")
 
