@@ -26,8 +26,8 @@
    (set-language-environment 'Cyrillic-CP1251))
   (t
    (set-language-environment "Russian")
-   (set-default-coding-systems 'utf-8)
-   (set-terminal-coding-system 'utf-8)
-   (prefer-coding-system       'utf-8)
+   (set-default-coding-systems 'utf-8-unix)
+   (set-terminal-coding-system 'utf-8-unix)
+   (prefer-coding-system       'utf-8-unix)
    (unless (getenv "LANG")
      (setenv "LANG" "ru_RU.UTF8"))))
