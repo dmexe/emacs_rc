@@ -7,6 +7,9 @@
 (dolist (i '("xml" "xsd" "rng" "xsl" "xslt" "svg" "rss"))
   (add-to-list 'auto-mode-alist (cons (concat "\\." i "\\'") 'nxml-mode)))
 
+(unless (boundp 'nxml-mode-abbrev-table)
+  (setq nxml-mode-abbrev-table (make-abbrev-table)))
+
 (defun nxml-hs-minor-mode (&rest arg)
   (interactive "P")
   (unless (assoc 'nxml-mode hs-special-modes-alist)
@@ -138,3 +141,15 @@
     :back "</style>")))
 
 (add-to-list 'mmm-mode-ext-classes-alist '(html-mode ".*" fancy-html))
+
+;; (load "~/.emacs.d/nxml/autostart.el")
+;; (ido-mode t)
+
+;; (setq
+;;  nxhtml-global-minor-mode t
+;;  mumamo-chunk-coloring 'submode-colored
+;;  nxhtml-skip-welcome t
+;;  indent-region-mode t
+;;  rng-nxml-auto-validate-flag nil
+;;  nxml-degraded t
+;;  )
