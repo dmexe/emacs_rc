@@ -123,9 +123,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (ido-mode t)
 (add-to-list 'ido-ignore-buffers "\\*")
+(setq ido-enable-flex-matching t)
 (add-hook 'ido-setup-hook
           #'(lambda ()
-              (define-key ido-completion-map "\t" 'ido-exit-minibuffer)))
+              (define-key ido-completion-map [tab] 'ido-complete)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

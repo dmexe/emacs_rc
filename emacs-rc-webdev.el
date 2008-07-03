@@ -63,7 +63,7 @@
 (autoload 'php-find-function-prototype "php-functions" "PHP functions" t)
 (autoload 'yaml-mode         "yaml-mode" "YAML editing mode." t)
 (autoload 'css-mode          "css-mode" "Mode for editing CSS files" t)
-(autoload 'js2-mode          "js2-mode" "Mode for editing Javascript files" t)
+(autoload 'js2-mode          "js2" "Mode for editing Javascript files" t)
 
 (setq auto-mode-alist  (cons '("\\.php$" . php-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.css$" . css-mode) auto-mode-alist))

@@ -89,6 +89,10 @@
    '(diff-indicator-added ((t (:background "#33AE27" :foreground "white"))))
    '(diff-added ((t (:inherit 'diff-indicator-added))))
 
+   ; js2
+   '(js2-external-variable-face ((t (:inherit 'font-lock-variable-name-face))))
+   '(js2-function-param-face ((t (:inherit 'font-lock-variable-name-face))))
+   '(js2-warning-face ((t (:inherit 'font-lock-warning-face))))
    ; modeline nad minibuffer
    '(minibuffer-noticeable-prompt ((t (:inherit 'font-lock-builtin-face :bold t))))
 
