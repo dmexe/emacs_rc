@@ -25,6 +25,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (tool-bar-mode 0)
 (menu-bar-mode 1)
+(fringe-mode 0)
+
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
