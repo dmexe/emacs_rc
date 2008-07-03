@@ -140,7 +140,7 @@
     :front "<style[^>]*type=\"text/css\"[^>]*>"
     :back "</style>")))
 
-(add-to-list 'mmm-mode-ext-classes-alist '(html-mode ".*" fancy-html))
+(add-to-list 'mmm-mode-ext-classes-alist '(html-mode nil fancy-html))
 
 ;; (load "~/.emacs.d/nxml/autostart.el")
 ;; (ido-mode t)

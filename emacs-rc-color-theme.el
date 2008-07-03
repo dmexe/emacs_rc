@@ -41,7 +41,7 @@
    '(font-lock-variable-name-face ((t (:foreground "#D0D0F3")))) ;;
    '(font-lock-function-name-face ((t (:foreground "#FFFB7B")))) ;; "#E8BF6A"
    '(font-lock-builtin-face ((t (:foreground "#59ACC2"))))
-   '(font-lock-preprocessor-face ((t (:background "#222222" :foreground "#CDCDCD"))))
+   '(font-lock-preprocessor-face ((t (:background "#181818" :foreground "#CDCDCD"))))
 
    ;; Compilation
    '(compilation-info ((t (:inherit 'font-lock-string-face :bold t))))
