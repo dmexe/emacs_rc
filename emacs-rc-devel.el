@@ -192,8 +192,8 @@
 
 (autoload 'pabbrev-mode "pabbrev")
 (setq pabbrev-idle-timer-verbose nil)
-(dolist (mode '(emacs-lisp-mode-hook
-                ruby-mode-hook
+(dolist (mode '(ruby-mode-hook
+                ;emacs-lisp-mode-hook
                 php-mode-hook
                 apache-mode-hook))
   (add-hook mode (lambda () (pabbrev-mode t))))
@@ -209,4 +209,3 @@
                 apache-mode-hook))
   (add-hook mode (lambda ()
                     (local-set-key (kbd "<tab>") 'indent-for-tab-command))))
-
