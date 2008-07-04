@@ -188,12 +188,13 @@
 ;; (yas/initialize)
 ;; (yas/load-directory "~/.emacs.d/yasnippet/snippets/text-mode")
 
-(defun my/compile-yasnippets
+(defun my/compile-yasnippets ()
   (interactive)
   (yas/compile-bundle "~/.emacs.d/yasnippet/yasnippet.el"
                     "~/.emacs.d/yasnippet/yasnippet-bundle.el"
                     "~/.emacs.d/rc/snippets/"
-                    "(yas/initialize)"))
+                    "(yas/initialize)")
+  (byte-compile-file "~/.emacs.d/yasnippet/yasnippet-bundle.el"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
