@@ -29,9 +29,9 @@
     ("xtn" "<xsl:template name=\"${match}\">
   $0
 </xsl:template>" "<xsl:template name=\"..\">...")
-    ("xat" "<xsl:apply-templates select=\"${match}\" />\n$0" "<xsl:apply-templates select=\"..\"/>")
-    ("xatm" "<xsl:apply-templates select=\"${match}\" mode=\"${mode}\" />\n$0" "<xsl:apply-templates select=\"..\" mode=\"...\"/>")
-    ("xvo" "<xsl:value-of select=\"${match}\" />\n$0" "<xsl:value-of select=\"..\"/>")
+    ("xat" "<xsl:apply-templates select=\"${match}\" />$0" "<xsl:apply-templates select=\"..\"/>")
+    ("xatm" "<xsl:apply-templates select=\"${match}\" mode=\"${mode}\" />$0" "<xsl:apply-templates select=\"..\" mode=\"...\"/>")
+    ("xvo" "<xsl:value-of select=\"${match}\" />$0" "<xsl:value-of select=\"..\"/>")
     ("xfe" "<xsl:for-each select=\"${match}\">
   $0
 </xsl:for-each>" "<xsl:for-each select=\"..\"/>")
