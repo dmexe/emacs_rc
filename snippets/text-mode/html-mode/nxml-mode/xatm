@@ -1,0 +1,3 @@
+#name : <xsl:apply-templates select="..." mode="...">
+# --
+<xsl:apply-templates select="${nodeset}" mode="${mode}"/>$0

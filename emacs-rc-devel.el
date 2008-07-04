@@ -178,13 +178,22 @@
 ;; YASnippet
 
 (setq load-path (cons (expand-file-name "~/.emacs.d/yasnippet") load-path))
-(require 'yasnippet)
+(require 'yasnippet-bundle)
+
+;; (require 'yasnippet)
 
 (setq hippie-expand-try-functions-list
       (cons 'yas/hippie-try-expand hippie-expand-try-functions-list))
-(yas/initialize)
+
+;; (yas/initialize)
 ;; (yas/load-directory "~/.emacs.d/yasnippet/snippets/text-mode")
 
+(defun my/compile-yasnippets
+  (interactive)
+  (yas/compile-bundle "~/.emacs.d/yasnippet/yasnippet.el"
+                    "~/.emacs.d/yasnippet/yasnippet-bundle.el"
+                    "~/.emacs.d/rc/snippets/"
+                    "(yas/initialize)"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
