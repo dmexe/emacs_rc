@@ -24,10 +24,28 @@
 ;;
 ;; Emacs Lisp Setup
 
+(defun my/pretty-lambdas ()
+  (font-lock-add-keywords
+   nil `(("(\\(lambda\\>\\)"
+          (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                    ,(make-char 'greek-iso8859-7 107))
+                    nil))))))
+
+(defun my/emacs-lisp-custom-keywords ()
+  (font-lock-add-keywords
+   nil
+   '(("(\\(when-bind\\|rails/root\\|rails/with-root\\|rails/with-current-buffer\\)\\>" 1 font-lock-keyword-face))))
+
+(put 'when-bind 'lisp-indent-function 1)
+(put 'rails/with-root 'lisp-indent-function 1)
+(put 'rails/root 'lisp-indent-function 1)
+
 (add-hook 'emacs-lisp-mode-hook
-          (lambda()
+          (lambda ()
             (hs-minor-mode)
             (imenu-add-to-menubar "IMENU")
+            (my/pretty-lambdas)
+            (my/emacs-lisp-custom-keywords)
             (set
              (make-local-variable 'hippie-expand-try-functions-list)
              (cons
@@ -85,7 +103,7 @@
 (autoload 'lua-mode "lua-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.lua\\'"   . lua-mode))
 (add-hook 'lua-mode-hook
-          (lambda()
+          (lambda ()
             (set (make-local-variable 'lua-default-application) "d:/local/bin/lua.exe")
             (set (make-local-variable 'lua-indent-level) default-tab-width)))
 
@@ -178,13 +196,23 @@
 ;; YASnippet
 
 (setq load-path (cons (expand-file-name "~/.emacs.d/yasnippet") load-path))
-(require 'yasnippet)
+(require 'yasnippet-bundle)
+
+;; (require 'yasnippet)
 
 (setq hippie-expand-try-functions-list
       (cons 'yas/hippie-try-expand hippie-expand-try-functions-list))
-(yas/initialize)
+
+;; (yas/initialize)
 ;; (yas/load-directory "~/.emacs.d/yasnippet/snippets/text-mode")
 
+(defun my/compile-yasnippets ()
+  (interactive)
+  (yas/compile-bundle "~/.emacs.d/yasnippet/yasnippet.el"
+                    "~/.emacs.d/yasnippet/yasnippet-bundle.el"
+                    "~/.emacs.d/rc/snippets/"
+                    "(yas/initialize)")
+  (byte-compile-file "~/.emacs.d/yasnippet/yasnippet-bundle.el"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -192,11 +220,11 @@
 
 (autoload 'pabbrev-mode "pabbrev")
 (setq pabbrev-idle-timer-verbose nil)
-(dolist (mode '(emacs-lisp-mode-hook
-                ruby-mode-hook
-                php-mode-hook
-                apache-mode-hook))
-  (add-hook mode (lambda () (pabbrev-mode t))))
+;; (dolist (mode '(ruby-mode-hook
+;;                 ;emacs-lisp-mode-hook
+;;                 php-mode-hook
+;;                 apache-mode-hook))
+;;   (add-hook mode (lambda () (pabbrev-mode t))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -209,4 +237,3 @@
                 apache-mode-hook))
   (add-hook mode (lambda ()
                     (local-set-key (kbd "<tab>") 'indent-for-tab-command))))
-

@@ -1,0 +1,4 @@
+#contributor : Jimmy Wu <frozenthrone88@gmail.com>
+#name : <textarea ...></textarea>
+# --
+<textarea name="${name}" id="${id}">$0</textarea>

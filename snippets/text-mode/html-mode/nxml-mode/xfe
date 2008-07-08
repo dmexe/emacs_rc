@@ -1,0 +1,5 @@
+#name : <xsl:for-each select="...">
+# --
+<xsl:for-each select="${nodeset}">
+  $0
+</xsl:for-each>

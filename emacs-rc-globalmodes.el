@@ -185,11 +185,16 @@
     t))
 
 (defadvice indent-according-to-mode (around indent-and-complete activate)
-  (unless (my/do-inside-yasnippet-p)
-    ;; completing
-    (when (looking-at "\\_>")
-      (hippie-expand nil))
-    ;; always indent line
-    ad-do-it))
+  ;; indent region
+  (if mark-active
+      (indent-region (region-beginning)
+                     (region-end))
+    ;; skip if in snippet
+    (unless (my/do-inside-yasnippet-p)
+      ;; completing
+      (when (looking-at "\\_>")
+        (hippie-expand nil))
+      ;; always indent line
+      ad-do-it)))
 
-; (ad-deactivate 'indent-according-to-mode)
+;;(ad-activate 'indent-according-to-mode)

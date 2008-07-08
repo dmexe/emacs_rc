@@ -13,6 +13,3 @@
 (load "emacs-rc-ruby")
 (load "emacs-rc-compile")
 (load "emacs-rc-keys")
-
-(when (fboundp 'yas/define-snippets)
-  (load "emacs-rc-yasnippets.el"))

@@ -1,0 +1,5 @@
+#name : <xsl:template match="..." mode="...">
+# --
+<xsl:template match="${match}" mode="${mode}">
+  $0
+</xsl:template>
