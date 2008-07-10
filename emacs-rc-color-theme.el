@@ -104,13 +104,13 @@
    '(mode-line-buffer-id ((t (:inherit 'mode-line :bold t))))
    '(mode-line-highlight ((t (:inherit 'mode-line-inactive))))
 
-   '(tooltip ((t
-               (:family
-                "-outline-Consolas-normal-r-normal-normal-*-*-96-96-c-*-iso10646-1"
-                :height 0.8
-                :foreground "systeminfotext"
-                :background "systeminfowindow"
-                :inherit (variable-pitch)))))
+;;;    '(tooltip ((t
+;;;                (:family
+;;;                 "-outline-Consolas-normal-r-normal-normal-*-*-96-96-c-*-iso10646-1"
+;;;                 :height 0.8
+;;;                 :foreground "systeminfotext"
+;;;                 :background "systeminfowindow"
+;;;                 :inherit (variable-pitch)))))
 
    '(completion-dynamic-face ((t (:inherit 'match))))
    '(highlight ((t (:inherit 'match))))))

@@ -150,7 +150,7 @@
 ;; Untabify Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;(setq load-path (cons (expand-file-name "~/.emacs.d/rails/trunk") load-path))
-(require 'untabify-file)
+(require 'untabify-file nil t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -184,7 +184,7 @@
     (yas/next-field-group)
     t))
 
-(defadvice indent-according-to-mode (around indent-and-complete activate)
+(defadvice indent-for-tab-command (around indent-and-complete activate)
   ;; indent region
   (if mark-active
       (indent-region (region-beginning)
