@@ -28,7 +28,7 @@
 (defun color-theme-dimaexe()
   (interactive)
   (custom-set-faces
-   '(default ((t (:background "#202020" :foreground "white"))))
+   '(default ((t (:background "#202020" :foreground "#E5E5E5"))))
    '(match ((t :background "#4A6152")))
    '(cursor ((t (:background "#FFFB7B"))))
    '(region ((t :background "#303C54")))
