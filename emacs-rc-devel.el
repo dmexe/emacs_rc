@@ -226,6 +226,10 @@
 ;;                 apache-mode-hook))
 ;;   (add-hook mode (lambda () (pabbrev-mode t))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Fold dwim
+(require 'fold-dwim)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -237,3 +241,4 @@
                 apache-mode-hook))
   (add-hook mode (lambda ()
                     (local-set-key (kbd "<tab>") 'indent-for-tab-command))))
+

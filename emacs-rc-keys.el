@@ -67,6 +67,9 @@
 (global-set-key (kbd "<C-f1>") 'emacs-ru-keyhelp)
 (global-set-key (kbd "<f8>") 'mmm-parse-buffer)
 
+;; fold-dwim
+(global-set-key (kbd "\C-c <tab>") 'fold-dwim-toggle)
+
 (case system-type
   ('darwin
    (global-set-key (kbd "M-SPC") 'toggle-input-method))

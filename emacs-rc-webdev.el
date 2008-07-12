@@ -27,7 +27,7 @@
   (run-hook-with-args-until-success 'nxml-completion-hook))
 
 (add-hook 'nxml-mode-hook
-          (lambda()
+          (lambda ()
             (nxml-hs-minor-mode t)
             (setq nxml-child-indent 2)
             (setq nxml-auto-insert-xml-declaration-flag t)
@@ -40,7 +40,7 @@
                     (cdr hippie-expand-try-functions-list))))
             (local-set-key (kbd "<return>") 'newline-and-indent)
             (define-abbrev nxml-mode-abbrev-table "table" ""
-              '(lambda() (snippet-insert "<table>$.</table>")))))
+              '(lambda () (snippet-insert "<table>$.</table>")))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
