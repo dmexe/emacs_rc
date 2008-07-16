@@ -42,7 +42,6 @@
             (define-abbrev nxml-mode-abbrev-table "table" ""
               '(lambda () (snippet-insert "<table>$.</table>")))))
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Apache Setup

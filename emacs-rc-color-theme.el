@@ -41,7 +41,7 @@
    '(font-lock-variable-name-face ((t (:foreground "#D0D0F3")))) ;;
    '(font-lock-function-name-face ((t (:foreground "#FFFB7B")))) ;; "#E8BF6A"
    '(font-lock-builtin-face ((t (:foreground "#59ACC2"))))
-   '(font-lock-preprocessor-face ((t (:background "#262626" :foreground "#FFFFFF"))))
+   '(font-lock-preprocessor-face ((t (:background "#282828")))) ;; :foreground "#C9C9C9"))))
 
    ;; jabber
    '(jabber-roster-user-online ((t (:inherit 'font-lock-string-face))))
@@ -63,6 +63,9 @@
    '(mmm-output-submode-face  ((t (:inherit 'font-lock-preprocessor-face))))
    '(mmm-code-submode-face    ((t (:inherit 'font-lock-preprocessor-face))))
    '(mmm-comment-submode-face ((t (:inherit 'font-lock-comment-face))))
+
+   ;; mumamo
+   '(mumamo-background-chunk-submode ((t (:inherit 'font-lock-preprocessor-face))))
 
    ; nXML
    '(nxml-element-colon-face    ((t (:bold t :foreground "#92D229"))))

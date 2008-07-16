@@ -234,7 +234,8 @@
     ;; skip if in snippet
     (unless (my/do-inside-yasnippet-p)
       ;; completing
-      (when (looking-at "\\_>")
+      (when (or (looking-at "\\_>")
+                (looking-back "[<#]")) ; special symbols
         (hippie-expand nil))
       ;; always indent line
       ad-do-it)))
