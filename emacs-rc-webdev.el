@@ -2,7 +2,7 @@
 ;;
 ;; nXML Setup
 
-(load "~/.emacs.d/nxml-mode/rng-auto.el")
+(load "~/.emacs.d/nxhtml/nxml-mode-20041004/rng-auto.el")
 
 (dolist (i '("xml" "xsd" "rng" "xsl" "xslt" "svg" "rss"))
   (add-to-list 'auto-mode-alist (cons (concat "\\." i "\\'") 'nxml-mode)))
@@ -58,7 +58,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; PHP, JavaScript, CSS Setup, YAML
+;; HTML, PHP, JavaScript, CSS Setup, YAML
 
 (autoload 'php-mode          "php-mode" "PHP editing mode." t)
 (autoload 'php-electric-mode "php-electric" "PHP electric mode." t)
@@ -72,6 +72,10 @@
 (setq auto-mode-alist  (cons '("\\.css$" . css-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.js$" .  js2-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.y[a]?ml$" . yaml-mode) auto-mode-alist))
+
+(add-hook 'html-mode-hook
+          (lambda()
+            (local-set-key (kbd "<return>") 'newline-and-indent)))
 
 (add-hook 'php-mode-hook
           (lambda()
@@ -95,61 +99,12 @@
             (setq css-electric-brace-behavior t)
             (setq css-electric-semi-behavior t)))
 
+;;; mumamo eruby-html
+(add-to-list 'load-path "~/.emacs.d/nxhtml/util")
+(autoload 'rng-clear-overlays "rng-valid" nil t)
+(autoload 'javascript-mode "javascript" nil t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; HTML/mmm-mode setup
-
-(setq load-path (cons (expand-file-name "~/.emacs.d/mmm-mode") load-path))
-(require 'mmm-auto)
-
-;; (setq mmm-global-mode 'maybe)
-(setq mmm-submode-decoration-level 2)
-(setq mmm-global-classes nil)
-
-(mmm-add-group
- 'fancy-html
- '((html-erb
-    :submode ruby-mode
-    :match-face (("<%#" . mmm-comment-submode-face)
-                 ("<%=" . mmm-output-submode-face)
-                 ("<%"  . mmm-code-submode-face))
-    :front "<%[#=]?"
-    :back "%>"
-    :insert ((?% erb-code       nil @ "<%"  @ " " _ " " @ "%>" @)
-             (?# erb-comment    nil @ "<%#" @ " " _ " " @ "%>" @)
-             (?= erb-expression nil @ "<%=" @ " " _ " " @ "%>" @)))
-
-   (html-php-embeded
-    :submode php-mode
-    :face mmm-code-submode-face
-    :front "<\\?\\(\\|php\\|=\\)?"
-    :back "\\?>"
-    :insert ((?p php-code   nil @ "<?php"  @ " " _ " " @ "?>" @)
-             (?P php-print  nil @ "<?=" @ " " _ " " @ "?>" @)))
-
-   (html-js-embeded
-    :submode js2-mode
-    :face mmm-code-submode-face
-    :front "<script[^>]*type=\"text/javascript\"[^>]*"
-    :back "</script>")
-
-   (html-css-embeded
-    :submode css-mode
-    :face mmm-code-submode-face
-    :front "<style[^>]*type=\"text/css\"[^>]*>"
-    :back "</style>")))
-
-(add-to-list 'mmm-mode-ext-classes-alist '(html-mode nil fancy-html))
-
-;; (load "~/.emacs.d/nxml/autostart.el")
-;; (ido-mode t)
-
-;; (setq
-;;  nxhtml-global-minor-mode t
-;;  mumamo-chunk-coloring 'submode-colored
-;;  nxhtml-skip-welcome t
-;;  indent-region-mode t
-;;  rng-nxml-auto-validate-flag nil
-;;  nxml-degraded t
-;;  )
+(require 'mumamo-fun)
+(setq mumamo-chunk-coloring 'submode-colored)
+(add-to-list 'auto-mode-alist '("\\.rhtml\\'" . eruby-html-mumamo))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . eruby-html-mumamo))

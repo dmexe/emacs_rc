@@ -2,8 +2,9 @@
 ;; Language Environment CP1251
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (when (eq system-type 'windows-nt)
-  (codepage-setup 866)
-  (codepage-setup 1251)
+  (when (fboundp 'codepage-setup)
+    (codepage-setup 866)
+    (codepage-setup 1251))
 
   (set-language-info-alist "Cyrillic-CP1251"
                            '((charset cyrillic-iso8859-5)

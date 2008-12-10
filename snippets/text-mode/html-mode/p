@@ -1,4 +1,4 @@
 #contributor : Jimmy Wu <frozenthrone88@gmail.com>
-#name : <div>...</div>
+#name : <p>...</p>
 # --
-<div$1>$0</div>
+<p>$0</p>

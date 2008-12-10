@@ -13,11 +13,23 @@
         '((top . 42) (left . 160)
           (width . 120) (height . 40))))
 
+(when (eq system-type 'windows-nt)
+  (setq default-frame-alist
+        '((top . 42) (left . 160)
+          (width . 120) (height . 40)
+          (foreground-color . "#E5E5E5")
+          (background-color . "#202020")
+          (font . "-outline-Consolas-medium-r-normal-normal-13-*-96-96-c-*-iso10646-1")))
+  (setq initial-frame-alist
+        '((scroll-bar . nil)
+          (top . 42) (left . 160)
+          (width . 120) (height . 40))))
+
 (case system-type
   (darwin
    (set-default-font "-apple-monaco-medium-r-normal--13-160-72-72-m-160-iso10646-1"))
   (t
-   (set-default-font "-outline-Consolas-medium-r-normal-normal-14-*-96-96-c-*-iso10646-1")))
+   (set-default-font "-outline-Consolas-medium-r-normal-normal-13-*-96-96-c-*-iso10646-1")))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -25,7 +37,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; based on the idleFingers Textmate theme
-(defun color-theme-dimaexe()
+(defun color-theme-dimaexe ()
   (interactive)
   (custom-set-faces
    '(default ((t (:background "#202020" :foreground "#E5E5E5"))))
@@ -41,7 +53,7 @@
    '(font-lock-variable-name-face ((t (:foreground "#D0D0F3")))) ;;
    '(font-lock-function-name-face ((t (:foreground "#FFFB7B")))) ;; "#E8BF6A"
    '(font-lock-builtin-face ((t (:foreground "#59ACC2"))))
-   '(font-lock-preprocessor-face ((t (:background "#262626" :foreground "#FFFFFF"))))
+   '(font-lock-preprocessor-face ((t (:background "#282828"))))
 
    ;; Compilation
    '(compilation-info ((t (:inherit 'font-lock-string-face :bold t))))
@@ -49,6 +61,9 @@
    '(compilation-line-number ((t (:foreground "#FF6666" :bold t))))
    '(flymake-errline ((t :underline "red")))
    '(flymake-warnline ((t :underline "green")))
+
+   ;; muamo
+   '(mumamo-background-chunk-submode ((t (:inherit 'font-lock-preprocessor-face))))
 
    ;; MMM
    '(mmm-declaration-submode-face ((t (:inherit 'font-lock-preprocessor-face))))

@@ -1,6 +1,4 @@
 #contributor : Jimmy Wu <frozenthrone88@gmail.com>
-#name : <ul id="...">...</ul>
+#name : <a href="...">...</a>
 # --
-<ul id="${id}">
-  $0
-</ul>
+<a href="$1">$2</a>
