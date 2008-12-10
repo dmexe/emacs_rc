@@ -101,6 +101,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/nxhtml/util")
 (require 'mumamo-fun)
+(require 'rng-valid)
 (setq mumamo-chunk-coloring 'submode-colored)
 (add-to-list 'auto-mode-alist '("\\.rhtml\\'" . eruby-html-mumamo))
 (add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-html-mumamo))
