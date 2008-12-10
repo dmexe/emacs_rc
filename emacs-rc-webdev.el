@@ -2,7 +2,7 @@
 ;;
 ;; nXML Setup
 
-(load "~/.emacs.d/nxml-mode/rng-auto.el")
+(load "~/.emacs.d/nxhtml/nxml-mode-20041004/rng-auto.el")
 
 (dolist (i '("xml" "xsd" "rng" "xsl" "xslt" "svg" "rss"))
   (add-to-list 'auto-mode-alist (cons (concat "\\." i "\\'") 'nxml-mode)))
