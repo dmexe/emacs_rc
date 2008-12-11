@@ -27,7 +27,7 @@
   (run-hook-with-args-until-success 'nxml-completion-hook))
 
 (add-hook 'nxml-mode-hook
-          (lambda()
+          (lambda ()
             (nxml-hs-minor-mode t)
             (setq nxml-child-indent 2)
             (setq nxml-auto-insert-xml-declaration-flag t)
@@ -40,8 +40,7 @@
                     (cdr hippie-expand-try-functions-list))))
             (local-set-key (kbd "<return>") 'newline-and-indent)
             (define-abbrev nxml-mode-abbrev-table "table" ""
-              '(lambda() (snippet-insert "<table>$.</table>")))))
-
+              '(lambda () (snippet-insert "<table>$.</table>")))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -67,6 +66,7 @@
 (autoload 'yaml-mode         "yaml-mode" "YAML editing mode." t)
 (autoload 'css-mode          "css-mode" "Mode for editing CSS files" t)
 (autoload 'js2-mode          "js2" "Mode for editing Javascript files" t)
+(autoload 'javascript-mode   "javascript" nil t)
 
 (setq auto-mode-alist  (cons '("\\.php$" . php-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.css$" . css-mode) auto-mode-alist))
@@ -99,12 +99,14 @@
             (setq css-electric-brace-behavior t)
             (setq css-electric-semi-behavior t)))
 
-;;; mumamo eruby-html
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; HTML/mumamo setup
+
 (add-to-list 'load-path "~/.emacs.d/nxhtml/util")
 (autoload 'rng-clear-overlays "rng-valid" nil t)
-(autoload 'javascript-mode "javascript" nil t)
-
 (require 'mumamo-fun)
+
 (setq mumamo-chunk-coloring 'submode-colored)
 (add-to-list 'auto-mode-alist '("\\.rhtml\\'" . eruby-html-mumamo))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . eruby-html-mumamo))
+(add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-html-mumamo))

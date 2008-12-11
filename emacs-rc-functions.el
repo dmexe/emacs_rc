@@ -173,4 +173,3 @@ unless return was pressed outside the comment"
         (delete-file filename)
         (set-visited-file-name newname)
         (set-buffer-modified-p nil)
-        t))))

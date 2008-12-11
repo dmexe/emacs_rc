@@ -26,7 +26,7 @@
 
 (defun my/pretty-lambdas ()
   (font-lock-add-keywords
-   nil `(("(\\(lambda\\>\\)"
+   nil `(("(\\(lambda\\>\\) *("
           (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                     ,(make-char 'greek-iso8859-7 107))
                     nil))))))
@@ -34,12 +34,11 @@
 (defun my/emacs-lisp-custom-keywords ()
   (font-lock-add-keywords
    nil
-   '(("(\\(when-bind\\|rails/root\\|rails/with-root\\|rails/with-current-buffer\\|rails/defresource\\)\\>" 1 font-lock-keyword-face))))
+   '(("(\\(when-bind\\|rails/root\\|rails/with-root\\|rails/with-current-buffer\\)\\>" 1 font-lock-keyword-face))))
 
 (put 'when-bind 'lisp-indent-function 1)
 (put 'rails/with-root 'lisp-indent-function 1)
 (put 'rails/root 'lisp-indent-function 1)
-(put 'rails/defrousource 'lisp-indent-function 1)
 
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
@@ -61,7 +60,7 @@
 ;; Tex/LaTeX Setup
 
 (setq load-path (cons (expand-file-name "~/.emacs.d/auctex") load-path))
-(require 'tex-site nil t)
+(require 'tex-site)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -197,15 +196,15 @@
 ;; YASnippet
 
 (setq load-path (cons (expand-file-name "~/.emacs.d/yasnippet") load-path))
-(require 'yasnippet)
+(require 'yasnippet-bundle)
 
 ;; (require 'yasnippet)
 
 (setq hippie-expand-try-functions-list
       (cons 'yas/hippie-try-expand hippie-expand-try-functions-list))
 
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/rc/snippets/text-mode")
+;; (yas/initialize)
+;; (yas/load-directory "~/.emacs.d/yasnippet/snippets/text-mode")
 
 (defun my/compile-yasnippets ()
   (interactive)
@@ -219,14 +218,18 @@
 ;;
 ;; Pabbrev setup
 
-(autoload 'pabbrev-mode "pabbrev")
-(setq pabbrev-idle-timer-verbose nil)
+;; (autoload 'pabbrev-mode "pabbrev")
+;; (setq pabbrev-idle-timer-verbose nil)
 ;; (dolist (mode '(ruby-mode-hook
 ;;                 ;emacs-lisp-mode-hook
 ;;                 php-mode-hook
 ;;                 apache-mode-hook))
 ;;   (add-hook mode (lambda () (pabbrev-mode t))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Fold dwim
+(require 'fold-dwim)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

@@ -170,13 +170,3 @@ See the variable `align-rules-list' for more details.")
           (goto-char start)
           (insert (format "'%s'" symbol-str))))))
     (goto-char initial-pos)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; RHTML with muamo
-
-(add-to-list 'load-path "~/emacs.d/nxml/util")
-(require 'mumamo-fun)
-(setq mumamo-chunk-coloring 'submode-colored)
-(add-to-list 'auto-mode-alist '("\\.rhtml\\'" . eruby-html-mumamo))
-(add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-html-mumamo))
