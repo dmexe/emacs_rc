@@ -1,3 +1,5 @@
+;; -*- coding: utf-8-unix; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Helper functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -172,4 +174,4 @@ unless return was pressed outside the comment"
         (copy-file filename newname 1)
         (delete-file filename)
         (set-visited-file-name newname)
-        (set-buffer-modified-p nil)
+        (set-buffer-modified-p nil)))))

@@ -1,3 +1,5 @@
+;; -*- coding: utf-8-unix; -*-
+
 (require 'speedbar)
 
 (eval-when-compile
