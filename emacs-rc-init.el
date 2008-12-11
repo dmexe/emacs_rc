@@ -4,8 +4,8 @@
 (require 'cl)
 
 (load "emacs-rc-defvar")
-(load "emacs-rc-color-theme")
 (load "emacs-rc-langenv")
+(load "emacs-rc-color-theme")
 (load "emacs-rc-functions")
 (load "emacs-rc-globalmodes")
 (load "emacs-rc-devel")

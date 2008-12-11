@@ -1,6 +1,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Language Environment CP1251
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(when (eq window-system 'ns)
+  (setq ns-expand-space -0.33)
+  (setq ns-use-system-highlight-color nil)
+  (setq ns-extended-platform-support-mode t))
+
 (when (eq system-type 'windows-nt)
   (when (fboundp 'codepage-setup)
     (codepage-setup 866)
