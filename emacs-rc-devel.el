@@ -62,7 +62,7 @@
 ;; Tex/LaTeX Setup
 
 (setq load-path (cons (expand-file-name "~/.emacs.d/auctex") load-path))
-(require 'tex-site)
+(require 'tex-site nil t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
