@@ -28,10 +28,12 @@
 (tool-bar-mode 0)
 (menu-bar-mode 1)
 (fringe-mode 0)
+(setq-default cursor-type 'hollow)
+(global-hl-line-mode 1)
+(set-face-background 'hl-line "#191919")
 
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Default variables

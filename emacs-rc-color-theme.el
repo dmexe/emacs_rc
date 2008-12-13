@@ -110,7 +110,8 @@
    '(mode-line-highlight ((t (:inherit mode-line-inactive))))
 
    '(completion-dynamic-face ((t (:inherit match))))
-   '(highlight ((t (:inherit match))))))
+   '(highlight ((t (:inherit match))))
+   '(hi-line ((t (:background "#191919"))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Load color-theme
