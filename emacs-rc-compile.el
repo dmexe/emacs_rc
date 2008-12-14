@@ -24,8 +24,8 @@
     ;; Append to list of all overlays
     (setq all-overlays (cons error-line-overlay all-overlays))
 
-    (overlay-put error-line-overlay
-                 'face '(background-color . "pink"))
+;;;     (overlay-put error-line-overlay
+;;;                  'face '(background-color . "pink"))
     (overlay-put error-line-overlay
                  'modification-hooks (list 'delete-this-overlay))
     (move-overlay error-line-overlay beg end)
@@ -51,7 +51,7 @@
     (error nil))
 )
 
-(setq compilation-finish-functions 'highlight-error-lines)
+;;(setq compilation-finish-functions 'highlight-error-lines)
 
 (defun compile-sln()
   (interactive)

@@ -10,14 +10,15 @@
           (width . 120) (height . 40)
           (foreground-color . "#E5E5E5")
           (background-color . "#141414")
-          (font . "-apple-monaco-medium-r-normal--13-160-72-72-m-160-iso10646-1")))
+          (fringe . 0)
+          (font . "-apple-monaco-medium-r-normal--14-160-72-72-m-160-iso10646-1")))
   (setq initial-frame-alist
         '((top . 42) (left . 160)
           (width . 120) (height . 40))))
 
 (case system-type
   (darwin
-   (set-default-font "-apple-monaco-medium-r-normal--13-160-72-72-m-160-iso10646-1"))
+   (set-default-font "-apple-monaco-medium-r-normal--14-160-72-72-m-160-iso10646-1"))
   (t
    (set-default-font "-outline-Consolas-medium-r-normal-normal-13-*-96-96-c-*-iso10646-1")))
 
