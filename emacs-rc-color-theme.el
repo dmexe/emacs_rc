@@ -109,6 +109,8 @@
 
    '(completion-dynamic-face ((t (:inherit match))))
    '(highlight ((t (:inherit match))))
-   '(hi-line ((t (:background "#202020"))))))
+   '(hi-line ((t (:background "#202020"))))
+   '(highline-face ((t (:background "#202020"))))
+   '(highlight-current-line-face ((t (:background "#202020"))))))
 
 (color-theme-dimaexe)

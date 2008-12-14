@@ -29,11 +29,21 @@
 (menu-bar-mode 1)
 (fringe-mode 0)
 (setq-default cursor-type 'hollow)
-(global-hl-line-mode 1)
-(set-face-background 'hl-line "#202020")
 
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
+
+;;; ---------------------------------------------------------
+;;; - HIghtlight current line
+;;;
+
+;; (require 'highline)
+
+(require 'highlight-current-line)
+(highlight-current-line-on t)
+
+;; (global-hl-line-mode -1)
+;; (set-face-background 'hl-line "#202020")
 
 
 ;;; ---------------------------------------------------------
@@ -51,7 +61,6 @@
 (column-number-mode 1)
 (auto-compression-mode t)
 (setq emacsw32-style-frame-title nil)
-
 
 ;;; ---------------------------------------------------------
 ;;; - Enabled up/lower string convert
