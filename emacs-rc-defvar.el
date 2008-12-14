@@ -30,7 +30,7 @@
 (fringe-mode 0)
 (setq-default cursor-type 'hollow)
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "#191919")
+(set-face-background 'hl-line "#202020")
 
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
@@ -80,8 +80,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Auto-save path
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq make-backup-files t)
+(setq version-control t)
 (add-to-list 'backup-directory-alist
-             (cons "." "~/.emacs.d/backups/"))
+             (cons ".*" "~/.emacs.d/backups/"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setup grep for Windows

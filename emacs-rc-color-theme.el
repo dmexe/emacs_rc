@@ -111,7 +111,7 @@
 
    '(completion-dynamic-face ((t (:inherit match))))
    '(highlight ((t (:inherit match))))
-   '(hi-line ((t (:background "#191919"))))))
+   '(hi-line ((t (:background "#202020"))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Load color-theme

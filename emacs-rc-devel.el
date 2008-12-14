@@ -36,11 +36,13 @@
 (defun my/emacs-lisp-custom-keywords ()
   (font-lock-add-keywords
    nil
-   '(("(\\(when-bind\\|rails/root\\|rails/with-root\\|rails/with-current-buffer\\)\\>" 1 font-lock-keyword-face))))
+   '(("(\\(when-bind\\|rails/root\\|rails/with-root\\|rails/with-current-buffer\\|rails/defresource\\|rails/defbundle\\)\\>" 1 font-lock-keyword-face))))
 
 (put 'when-bind 'lisp-indent-function 1)
 (put 'rails/with-root 'lisp-indent-function 1)
 (put 'rails/root 'lisp-indent-function 1)
+(put 'rails/defresource 'lisp-indent-function 1)
+(put 'rails/defbundle 'lisp-indent-function 1)
 
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
