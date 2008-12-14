@@ -1,9 +1,8 @@
 ;; -*- coding: utf-8-unix; -*-
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Ruby
-
+;;; ---------------------------------------------------------
+;;; - Ruby
+;;;
 (setq load-path (cons (expand-file-name "~/.emacs.d/ruby") load-path))
 (autoload 'ruby-mode "ruby-mode" "Ruby editing mode." t)
 (autoload 'ruby-electric-mode "ruby-electric" "Ruby electric mode." t)
@@ -12,7 +11,7 @@
 (add-to-list 'auto-mode-alist (cons (concat "Rakefile\\'") 'ruby-mode))
 
 (add-hook 'ruby-mode-hook
-          (lambda ()
+          '(lambda ()
             (set (make-local-variable 'tab-width) 2)
             (ruby-electric-mode t)
             (ruby-hs-minor-mode t)
@@ -24,10 +23,10 @@
             (local-set-key (kbd "C-:") 'my/ruby-toggle-string<>simbol)
             (local-set-key (kbd "<return>") 'newline-and-indent)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Setup align for ruby
 
+;;; ---------------------------------------------------------
+;;; - Align for ruby
+;;;
 (require 'align)
 
 (defconst align-ruby-modes '(ruby-mode)
@@ -55,10 +54,9 @@ See the variable `align-rules-list' for more details.")
   (add-to-list 'align-rules-list it))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Setup hideshow for ruby
-
+;;; ---------------------------------------------------------
+;;; - Hideshow for ruby
+;;;
 (defun ruby-hs-minor-mode (&optional arg)
   (interactive)
   (require 'hideshow)
@@ -69,17 +67,14 @@ See the variable `align-rules-list' for more details.")
                  "\\(def\\|do\\)"
                  "end"
                  "#"
-                 (lambda (&rest args) (ruby-end-of-block))
-                 ;(lambda (&rest args) (ruby-beginning-of-defun))
-                 )
+                 '(lambda (&rest args) (ruby-end-of-block)))
            hs-special-modes-alist)))
   (hs-minor-mode arg))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Setup flymake for ruby
-
+;;; ---------------------------------------------------------
+;;; - Flymake for ruby
+;;;
 (defconst flymake-allowed-ruby-file-name-masks
   '(("\\.rb\\'"      flymake-ruby-init)
     ("\\.rxml\\'"    flymake-ruby-init)
@@ -116,27 +111,26 @@ See the variable `align-rules-list' for more details.")
   (add-hook 'ruby-mode-hook 'flymake-ruby-load))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Rails
-
+;;; ---------------------------------------------------------
+;;; - Rails
+;;;
 (setq load-path (cons (expand-file-name "~/.emacs.d/rails-reloaded") load-path))
 (require 'rails-autoload)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; HAML
-
+;;; ---------------------------------------------------------
+;;; - HAML
+;;;
 (setq load-path (cons (expand-file-name "~/.emacs.d/haml") load-path))
 (autoload 'haml-mode "haml-mode" "Major mode to edit HAML files")
+(autoload 'haml-mode "sass-mode" "Major mode to edit SASS files")
 (add-to-list 'auto-mode-alist (cons (concat "\\.haml\\'") 'haml-mode))
+(add-to-list 'auto-mode-alist (cons (concat "\\.sass\\'") 'sass-mode))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Ruby functions
-
+;;; ---------------------------------------------------------
+;;; - Ruby functions
+;;;
 (defun my/ruby-toggle-string<>simbol ()
   "Easy to switch between strings and symbols."
   (interactive)

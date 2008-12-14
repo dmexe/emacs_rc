@@ -1,13 +1,8 @@
 ;; -*- coding: utf-8-unix; -*-
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Language Environment CP1251
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(when (eq window-system 'ns)
-  (setq ns-expand-space -0.40)
-  (setq ns-use-system-highlight-color nil)
-  (setq ns-extended-platform-support-mode t))
-
+;;; ---------------------------------------------------------
+;;; - Language Environment CP1251
+;;;
 (when (eq system-type 'windows-nt)
   (when (fboundp 'codepage-setup)
     (codepage-setup 866)

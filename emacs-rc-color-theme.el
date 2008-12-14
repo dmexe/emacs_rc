@@ -1,9 +1,8 @@
 ;; -*- coding: utf-8-unix; -*-
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Frames Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;; ---------------------------------------------------------
+;;; - Frames Setup
+;;;
 (when (eq system-type 'darwin)
   (setq default-frame-alist
         '((top . 42) (left . 160)
@@ -18,16 +17,14 @@
 
 (case system-type
   (darwin
-   (set-default-font "-apple-monaco-medium-r-normal--14-160-72-72-m-160-iso10646-1"))
+   (set-frame-font "-apple-monaco-medium-r-normal--14-160-72-72-m-160-iso10646-1"))
   (t
-   (set-default-font "-outline-Consolas-medium-r-normal-normal-13-*-96-96-c-*-iso10646-1")))
+   (set-frame-font "-outline-Consolas-medium-r-normal-normal-13-*-96-96-c-*-iso10646-1")))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Default colors left
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; based on the idleFingers Textmate theme
+;;; ---------------------------------------------------------
+;;; - based on the idleFingers Textmate theme
+;;;
 (defun color-theme-dimaexe()
   (interactive)
   (custom-set-faces
@@ -114,7 +111,4 @@
    '(highlight ((t (:inherit match))))
    '(hi-line ((t (:background "#202020"))))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Load color-theme
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (color-theme-dimaexe)

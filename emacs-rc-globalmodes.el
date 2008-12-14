@@ -6,9 +6,10 @@
   (require 'dired)
   (require 'ispell))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Emacs Server
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; ---------------------------------------------------------
+;;; - Emacs Server
+;;;
 (case system-type
   ('darwin
    (server-start))
@@ -17,36 +18,34 @@
    ; don't ask before kill a client buffer
    (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Session
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (desktop-save-mode 1)
-;; (setq desktop-dirname (expand-file-name "~/.emacs.d/"))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Font Lock Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - Font Lock Setup
+;;;
 (require 'font-lock)
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
 (show-paren-mode 1)
 (transient-mark-mode t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Save buffer position
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; ---------------------------------------------------------
+;;; - Save buffer position
+;;;
 (require 'saveplace)
 (set-default 'save-place t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Recent Files
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; ---------------------------------------------------------
+;;; - Recent files
+;;;
 (require 'recentf)
 (recentf-mode 1)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; SpeedBar Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; ---------------------------------------------------------
+;;; - Speedbar setup
+;;;
 (setq speedbar-frame-parameters
       '((minibuffer)
         (width          . 30)
@@ -60,28 +59,28 @@
 (setq speedbar-indentation-width 2)
 
 (add-hook 'speedbar-mode-hook
-          (lambda()
+          '(lambda()
             (local-set-key (kbd "<DEL>") 'speedbar-up-directory)
             (set (make-local-variable 'speedbar-show-unknown-files) t)))
 (add-hook 'speebar-after-create-hook
-          (lambda ()
+          '(lambda ()
             (set-background-color "white")))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; iBuffer Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - iBuffer setup
+;;;
 (add-hook 'ibuffer-mode-hook
-          (lambda()
+          '(lambda()
             (local-set-key (kbd "RET") 'ibuffer-do-view-other-frame)))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Dired Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - Dired setup
+;;;
+(require 'dired-single)
 (add-hook 'dired-load-hook ; dired setup to use single buffer
-          (lambda()
-            (require 'dired-single)
+          '(lambda()
             (set (make-local-variable 'dired-listing-switches) "-alF")
             (set (make-local-variable 'dired-recursive-deletes) t)
             (set (make-local-variable 'ls-lisp-dirs-first) t)
@@ -90,9 +89,10 @@
             (define-key dired-mode-map (kbd "<DEL>")
               #'(lambda () (interactive) (joc-dired-single-buffer "..")))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Auto-Insert Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; ---------------------------------------------------------
+;;; - Auto-insert setup
+;;;
 (require 'autoinsert)
 (add-hook 'find-file-hook 'auto-insert)
 (setq auto-insert-directory "~/.templates/")
@@ -111,18 +111,20 @@
          "#define " str "\n\n"
          _ "\n\n#endif" " /* " str " */")))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Hippie-Expand Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; ---------------------------------------------------------
+;;; - Hippie-expand setup
+;;;
 (setq hippie-expand-try-functions-list
       '(
         ;try-complete-abbrev
         try-expand-dabbrev
         try-expand-dabbrev-all-buffers))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ido Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; ---------------------------------------------------------
+;;; - ido setup
+;;;
 (require 'ido)
 (ido-mode t)
 (add-to-list 'ido-ignore-buffers "\\*")
@@ -132,9 +134,9 @@
               (define-key ido-completion-map [tab] 'ido-complete)))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ispell Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - Ispell setup
+;;;
 (case system-type
   ('darwin
    nil)
@@ -143,59 +145,21 @@
    (setq ispell-program-name "D:/local/Aspell/bin/aspell")))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; IMENU Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - imenu setup
+;;;
 (setq imenu-use-popup-menu t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Untabify Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'untabify-file nil t)
+
+;;; ---------------------------------------------------------
+;;; - Untabify setup
+;;;
+(require 'untabify-file)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Uniqufy Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - Uniqufy setup
+;;;
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Automatic indentation pasted region
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defadvice yank-pop (after indent-region activate)
-  (if (member major-mode '(emacs-lisp-mode
-                           scheme-mode lisp-mode
-                           c-mode c++-mode objc-mode
-                           latex-mode plain-tex-mode
-                           php-mode nxml-mode
-                           ruby-mode))
-      (indent-region (region-beginning) (region-end) nil)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Indent modification
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun my/yasnippet-p (ov)
-  (overlay-get ov 'yas/snippet))
-
-(defun my/do-inside-yasnippet-p ()
-  (when (or (find-if 'my/yasnippet-p (overlays-at (point)))
-            (find-if 'my/yasnippet-p (overlays-at (- (point) 1))))
-    (yas/next-field-group)
-    t))
-
-(defadvice indent-for-tab-command (around indent-and-complete activate)
-  ;; indent region
-  (if mark-active
-      (indent-region (region-beginning)
-                     (region-end))
-    ;; skip if in snippet
-    (unless (my/do-inside-yasnippet-p)
-      ;; completing
-      (when (looking-at "\\_>")
-        (hippie-expand nil))
-      ;; always indent line
-      ad-do-it)))
-
-;;(ad-activate 'indent-according-to-mode)

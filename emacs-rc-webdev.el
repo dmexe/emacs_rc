@@ -1,9 +1,8 @@
 ;; -*- coding: utf-8-unix; -*-
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; nXML Setup
-
+;;; ---------------------------------------------------------
+;;; - nXML
+;;;
 (load "~/.emacs.d/nxhtml/nxml-mode-20041004/rng-auto.el")
 
 (dolist (i '("xml" "xsd" "rng" "xsl" "xslt" "svg" "rss"))
@@ -29,7 +28,7 @@
   (run-hook-with-args-until-success 'nxml-completion-hook))
 
 (add-hook 'nxml-mode-hook
-          (lambda ()
+          '(lambda ()
             (nxml-hs-minor-mode t)
             (setq nxml-child-indent 2)
             (setq nxml-auto-insert-xml-declaration-flag t)
@@ -44,23 +43,23 @@
             (define-abbrev nxml-mode-abbrev-table "table" ""
               '(lambda () (snippet-insert "<table>$.</table>")))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Apache Setup
 
+;;; ---------------------------------------------------------
+;;; - Apache
+;;;
 (autoload 'apache-mode "apache-mode" nil t)
 (dolist (i '("\\.htaccess\\'" "httpd\\.conf\\'" "srm\\.conf\\'"
              "access\\.conf\\'" "sites-\\(available\\|enabled\\)/"))
   (add-to-list 'auto-mode-alist (cons i  'apache-mode)))
 
 (add-hook 'apache-mode-hook
-          (lambda()
+          '(lambda()
             (set (make-local-variable 'apache-indent-level) 2)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; HTML, PHP, JavaScript, CSS Setup, YAML
 
+;;; ---------------------------------------------------------
+;;; - HTML, PHP, JavaScript, CSS Setup, YAML
+;;;
 (autoload 'php-mode          "php-mode" "PHP editing mode." t)
 (autoload 'php-electric-mode "php-electric" "PHP electric mode." t)
 (autoload 'php-flymake-load  "php-flymake" "PHP flymake mode." t)
@@ -76,14 +75,14 @@
 (setq auto-mode-alist  (cons '("\\.y[a]?ml$" . yaml-mode) auto-mode-alist))
 
 (add-hook 'html-mode-hook
-          (lambda()
+          '(lambda()
             (local-set-key (kbd "<return>") 'newline-and-indent)))
 
 (add-hook 'php-mode-hook
-          (lambda()
+          '(lambda()
             (php-electric-mode 1)
             (php-flymake-load)
-            (my-c-mode-common-hook)
+            (my/c-mode-common-hook)
             (modify-syntax-entry ?_ "w" php-mode-syntax-table)
             (local-set-key (kbd "<f1>") (lambda()
                                           (interactive)
@@ -96,15 +95,15 @@
             (local-set-key (kbd "<C-f12>") 'php-insert-comment)))
 
 (add-hook 'css-mode-hook
-          (lambda()
+          '(lambda()
             (setq css-indent-offset 2)
             (setq css-electric-brace-behavior t)
             (setq css-electric-semi-behavior t)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; HTML/mumamo setup
 
+;;; ---------------------------------------------------------
+;;; - HTML/mumamo setup
+;;;
 (add-to-list 'load-path "~/.emacs.d/nxhtml/util")
 (autoload 'rng-clear-overlays "rng-valid" nil t)
 (require 'mumamo-fun)

@@ -1,8 +1,8 @@
 ;; -*- coding: utf-8-unix; -*-
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Windows Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - Toggle input method for windows
+;;;
 (when (eq system-type 'windows-nt)
   (defvar safe-language-change-flag nil)
   (defun safe-language-change ()
@@ -22,20 +22,19 @@
   (define-key function-key-map [(control tab)] [?\M-\t]))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; OSX Setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;; ---------------------------------------------------------
+;;; - Carbon
+;;;
 (when (eq system-type 'darwin)
   ;; skip to pass keys to system
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'meta)
   (setq mac-pass-command-to-system nil))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Key bind setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;; ---------------------------------------------------------
+;;; - Keys
+;;;
 (global-set-key [f9] 'svn-status)
 (global-set-key [f11] 'speedbar-get-focus)
 (global-set-key [f4] 'kill-this-buffer)

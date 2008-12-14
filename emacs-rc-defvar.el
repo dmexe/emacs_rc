@@ -1,15 +1,15 @@
 ;; -*- coding: utf-8-unix; -*-
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Default email
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - Email
+;;;
 (setq user-mail-address "dima.exe@gmail.com")
 (setq user-full-name "Dmitry Galinsky")
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Window title format setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - Window title format
+;;;
 (setq-default
  frame-title-format
  (list
@@ -22,9 +22,9 @@
        ("%b - Dir:  " default-directory)))))))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Display setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - Display setup
+;;;
 (tool-bar-mode 0)
 (menu-bar-mode 1)
 (fringe-mode 0)
@@ -35,9 +35,10 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Default variables
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; ---------------------------------------------------------
+;;; - Default variables
+;;;
 (setq inhibit-startup-message t) ;; don't display startup message
 (setq default-tab-width 2)
 (setq c-basic-offset 2)
@@ -51,45 +52,58 @@
 (auto-compression-mode t)
 (setq emacsw32-style-frame-title nil)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Enabled up/lower string convert
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; ---------------------------------------------------------
+;;; - Enabled up/lower string convert
+;;;
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Delete selection (from pc-selection)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; ---------------------------------------------------------
+;;; - Delete selection (from pc-selection)
+;;;
 (delete-selection-mode 1)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Scrolling setup
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - Scrolling setup
+;;;
 (setq scroll-conservatively 50)
 (setq scroll-preserve-screen-position 't)
 (setq scroll-margin 5)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Enable auto-revert files
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - Enable auto-revert files
+;;;
 (global-auto-revert-mode t)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Auto-save path
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ---------------------------------------------------------
+;;; - Auto-save path & backup
+;;;
 (setq make-backup-files t)
 (setq version-control t)
 (setq delete-old-versions t)
 (add-to-list 'backup-directory-alist
              (cons ".*" "~/.emacs.d/backups/"))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Setup grep for Windows
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;;; ---------------------------------------------------------
+;;; - Setup grep for Windows
+;;;
+(unless (or (boundp 'grep-find-command)
+            (boundp 'grep-find-template))
+  (defvar grep-find-command nil "fake defination")
+  (defvar grep-find-template nil "fake defination"))
 (when (eq system-type 'windows-nt)
   (setq grep-find-command '("gfind . -type f -exec grep -nH -e  {} NUL \";\"" . 34))
   (setq grep-find-template "gfind . <X> -type f <F> -exec grep <C> -nH -e <R> {} NUL \";\""))
+
+;;; ---------------------------------------------------------
+;;; - Cocoa Emacs
+;;;
+(when (eq window-system 'ns)
+  (setq ns-expand-space -0.40)
+  (setq ns-use-system-highlight-color nil)
+  (setq ns-extended-platform-support-mode t))
