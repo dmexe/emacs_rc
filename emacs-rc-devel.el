@@ -251,14 +251,29 @@
     t))
 
 (defadvice indent-for-tab-command (around indent-and-complete activate)
-  ;; indent region
-  (if mark-active
-      (indent-region (region-beginning)
-                     (region-end))
-    ;; skip if in snippet
-    (unless (my/do-inside-yasnippet-p)
-      ;; completing
-      (when (looking-at "\\_>")
-        (hippie-expand nil))
+  "Do:
+* Indent region if `mark-active'
+** (or) Next yasnippet group if inside snippet
+*** (or) Complete using `hippie-expand'
+* (unless) major-mode have property 'indent-or-complete and before sexps was called
+**  ad-do-it"
+  (let (run)
+    ;; indent region
+    (setq
+     run
+     (if mark-active
+         (progn
+           (indent-region (region-beginning)
+                          (region-end))
+           t)
+       ;; skip if in snippet
+       (if (my/do-inside-yasnippet-p)
+           t
+         ;; completing
+         (when (looking-at "\\_>")
+           (hippie-expand nil)
+           t))))
+    (unless (and run
+                 (get major-mode 'indent-or-complete))
       ;; always indent line
       ad-do-it)))

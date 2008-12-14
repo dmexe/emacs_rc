@@ -74,6 +74,8 @@
 (setq auto-mode-alist  (cons '("\\.js$" .  js2-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.y[a]?ml$" . yaml-mode) auto-mode-alist))
 
+(put 'js2-mode 'indent-or-complete t) ;;
+
 (add-hook 'html-mode-hook
           '(lambda()
             (local-set-key (kbd "<return>") 'newline-and-indent)))
