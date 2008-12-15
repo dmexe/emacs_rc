@@ -17,7 +17,7 @@
 
 (case system-type
   (darwin
-   (set-frame-font "-apple-monaco-medium-r-normal--14-160-72-72-m-160-iso10646-1"))
+   (set-frame-font "-apple-monaco-medium-r-normal--13-160-72-72-m-160-iso10646-1"))
   (t
    (set-frame-font "-outline-Consolas-medium-r-normal-normal-13-*-96-96-c-*-iso10646-1")))
 

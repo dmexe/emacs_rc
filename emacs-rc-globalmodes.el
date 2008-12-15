@@ -194,15 +194,20 @@
     (volatile)
     (delayed)))
 
+;; to disable loading 'woman and 'info
+(defvar anything-c-source-info-pages nil)
+(defvar anything-c-source-man-pages nil)
+
 (require 'anything)
 (require 'anything-config)
-(setq anything-candidate-number-limit 20)
+
+(setq anything-candidate-number-limit 25)
 
 (setq anything-sources
       (list
        anything-c-source-occur
        anything-c-source-imenu
-       anything-c-source-file-name-history
+       anything-c-source-recentf
        anything-c-source-emacs-commands
        anything-c-source-complex-command-history
        anything-c-source-locate))
