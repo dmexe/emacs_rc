@@ -68,6 +68,8 @@
 (global-set-key (kbd "<C-f1>") 'emacs-ru-keyhelp)
 (global-set-key (kbd "<f8>") 'mmm-parse-buffer)
 
+(global-set-key (kbd "M-s") 'anything)
+
 (case system-type
   ('darwin
    (global-set-key (kbd "M-SPC") 'toggle-input-method))

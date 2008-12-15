@@ -163,3 +163,46 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
+;;; ---------------------------------------------------------
+;;; - anything
+;;;
+
+(defvar anything-c-source-occur
+  '((name . "Occur")
+    (init . (lambda ()
+              (setq anything-occur-current-buffer
+                    (current-buffer))))
+    (candidates . (lambda ()
+                    (let ((anything-occur-buffer (get-buffer-create "*Anything Occur*")))
+                      (with-current-buffer anything-occur-buffer
+                        (occur-mode)
+                        (erase-buffer)
+                        (let ((count (occur-engine anything-pattern
+                                                   (list anything-occur-current-buffer) anything-occur-buffer
+                                                   list-matching-lines-default-context-lines case-fold-search
+                                                   list-matching-lines-buffer-name-face
+                                                   nil list-matching-lines-face
+                                                   (not (eq occur-excluded-properties t)))))
+                          (when (> count 0)
+                            (setq next-error-last-buffer anything-occur-buffer)
+                            (cdr (split-string (buffer-string) "\n" t))))))))
+    (action . (("Goto line" . (lambda (candidate)
+                                (with-current-buffer "*Anything Occur*"
+                                  (search-forward candidate))
+                                (goto-line (string-to-number candidate) anything-occur-current-buffer)))))
+    (requires-pattern . 3)
+    (volatile)
+    (delayed)))
+
+(require 'anything)
+(require 'anything-config)
+(setq anything-candidate-number-limit 20)
+
+(setq anything-sources
+      (list
+       anything-c-source-occur
+       anything-c-source-imenu
+       anything-c-source-file-name-history
+       anything-c-source-emacs-commands
+       anything-c-source-complex-command-history
+       anything-c-source-locate))

@@ -29,7 +29,7 @@
   (interactive)
   (custom-set-faces
    '(default ((t (:background "#141414" :foreground "#E5E5E5"))))
-   '(match ((t :background "#4A6152")))
+   '(match ((t :background "#303C54")))
    '(cursor ((t (:background "#FFFB7B"))))
    '(region ((t :background "#303C54")))
    '(font-lock-comment-face ((t (:italic t :foreground "#B150E7"))))
@@ -96,6 +96,11 @@
    '(js2-external-variable-face ((t (:inherit font-lock-variable-name-face))))
    '(js2-function-param-face ((t (:inherit font-lock-variable-name-face))))
    '(js2-warning-face ((t (:inherit font-lock-warning-face))))
+
+   ;; anything
+   '(anything-header ((t (:inherit font-lock-type-face :background "#202020"))))
+   '(anything-isearch-match ((t (:inherit match))))
+
    ; modeline nad minibuffer
    '(minibuffer-noticeable-prompt ((t (:inherit font-lock-builtin-face :bold t))))
 
