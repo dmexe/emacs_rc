@@ -172,9 +172,10 @@
 ;;; - anything
 ;;;
 
-;; to disable loading 'woman and 'info
-(defvar anything-c-source-info-pages nil)
-(defvar anything-c-source-man-pages nil)
+;; to disable adaptive-history
+(condition-case nil
+    (delete-file "~/.emacs.d/anything-c-adaptive-history")
+  (error nil))
 
 ;; (install-elisp-from-emacswiki "anything.el")
 (require 'anything)
