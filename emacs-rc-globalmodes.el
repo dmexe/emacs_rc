@@ -164,8 +164,28 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ;;; ---------------------------------------------------------
+;;; - install elisp
+;;;
+(require 'install-elisp)
+
+;;; ---------------------------------------------------------
 ;;; - anything
 ;;;
+
+;; to disable loading 'woman and 'info
+(defvar anything-c-source-info-pages nil)
+(defvar anything-c-source-man-pages nil)
+
+;; (install-elisp-from-emacswiki "anything.el")
+(require 'anything)
+
+;; (install-elisp-from-emacswiki "anything-config.el")
+(require 'anything-config)
+
+;; (install-elisp "http://www4.atpages.jp/loveloveelisp/anything-c-imenu.el")
+(require 'anything-c-imenu)
+
+(setq anything-candidate-number-limit 25)
 
 (defvar anything-c-source-occur
   '((name . "Occur")
@@ -194,14 +214,6 @@
     (volatile)
     (delayed)))
 
-;; to disable loading 'woman and 'info
-(defvar anything-c-source-info-pages nil)
-(defvar anything-c-source-man-pages nil)
-
-(require 'anything)
-(require 'anything-config)
-
-(setq anything-candidate-number-limit 25)
 
 (setq anything-sources
       (list
@@ -211,3 +223,14 @@
        anything-c-source-emacs-commands
        anything-c-source-complex-command-history
        anything-c-source-locate))
+
+;;; ---------------------------------------------------------
+;;; - Path for ruby-mode.el to generate correct imenu index
+;;;
+;;;  in `ruby-imenu-create-index-in-block' replace:
+;;;    (setq pos (match-beginning 0)))
+;;;  with:
+;;;    (save-excursion
+;;;      (goto-char (match-beginning 0))
+;;;      (setq pos
+;;;        (if imenu-use-markers (point-marker) (point))))
