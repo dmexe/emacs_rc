@@ -219,7 +219,7 @@
       (list
        anything-c-source-occur
        anything-c-source-imenu
-       anything-c-source-recentf
+       anything-c-source-file-name-history
        anything-c-source-emacs-commands
        anything-c-source-complex-command-history
        anything-c-source-locate))
