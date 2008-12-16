@@ -81,13 +81,13 @@
 (require 'dired-single)
 (add-hook 'dired-load-hook ; dired setup to use single buffer
           '(lambda()
-            (set (make-local-variable 'dired-listing-switches) "-alF")
-            (set (make-local-variable 'dired-recursive-deletes) t)
-            (set (make-local-variable 'ls-lisp-dirs-first) t)
-            (define-key dired-mode-map [return] 'joc-dired-single-buffer)
-            (define-key dired-mode-map [mouse-1] 'joc-dired-single-buffer-mouse)
-            (define-key dired-mode-map (kbd "<DEL>")
-              #'(lambda () (interactive) (joc-dired-single-buffer "..")))))
+             (set (make-local-variable 'dired-listing-switches) "-alF")
+             (set (make-local-variable 'dired-recursive-deletes) t)
+             (set (make-local-variable 'ls-lisp-dirs-first) t)
+             (define-key dired-mode-map [return] 'joc-dired-single-buffer)
+             (define-key dired-mode-map [mouse-1] 'joc-dired-single-buffer-mouse)
+             (define-key dired-mode-map (kbd "<DEL>")
+               #'(lambda () (interactive) (joc-dired-single-buffer "..")))))
 
 
 ;;; ---------------------------------------------------------

@@ -19,7 +19,7 @@
   (darwin
    (set-frame-font "-apple-monaco-medium-r-normal--13-160-72-72-m-160-iso10646-1"))
   (t
-   (set-frame-font "-outline-Consolas-medium-r-normal-normal-13-*-96-96-c-*-iso10646-1")))
+   (set-frame-font "-outline-Consolas-medium-r-normal-normal-12-*-96-96-c-*-iso10646-1")))
 
 
 ;;; ---------------------------------------------------------
@@ -29,7 +29,7 @@
   (interactive)
   (custom-set-faces
    '(default ((t (:background "#141414" :foreground "#E5E5E5"))))
-   '(match ((t :background "#303C54")))
+   '(match ((t :background  "#303C54")))
    '(cursor ((t (:background "#FFFB7B"))))
    '(region ((t :background "#303C54")))
    '(font-lock-comment-face ((t (:italic t :foreground "#B150E7"))))

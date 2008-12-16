@@ -42,7 +42,8 @@
 (require 'highlight-current-line)
 (highlight-current-line-on t)
 
-;; (global-hl-line-mode -1)
+;; (require 'hl-line)
+;; (global-hl-line-mode t)
 ;; (set-face-background 'hl-line "#202020")
 
 
