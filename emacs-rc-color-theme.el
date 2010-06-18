@@ -6,18 +6,18 @@
 (when (eq system-type 'darwin)
   (setq default-frame-alist
         '((top . 42) (left . 160)
-          (width . 120) (height . 40)
+          (width . 100) (height . 50)
           (foreground-color . "#E5E5E5")
           (background-color . "#141414")
           (fringe . 0)
-          (font . "-apple-monaco-medium-r-normal--14-160-72-72-m-160-iso10646-1")))
+          (font . "-apple-monaco-medium-r-normal--11-160-72-72-m-160-iso10646-1")))
   (setq initial-frame-alist
         '((top . 42) (left . 160)
-          (width . 120) (height . 40))))
+          (width . 100) (height . 50))))
 
 (case system-type
   (darwin
-   (set-frame-font "-apple-monaco-medium-r-normal--13-160-72-72-m-160-iso10646-1"))
+   (set-frame-font "-apple-monaco-medium-r-normal--11-160-72-72-m-160-iso10646-1"))
   (t
    (set-frame-font "-outline-Consolas-medium-r-normal-normal-12-*-96-96-c-*-iso10646-1")))
 
@@ -100,6 +100,11 @@
    ;; anything
    '(anything-header ((t (:inherit font-lock-type-face :background "#202020"))))
    '(anything-isearch-match ((t (:inherit match))))
+
+   ;; magit
+   '(magit-item-highlight nil)
+   '(magit-diff-add ((t :inherit 'diff-added)))
+   '(magit-diff-del ((t :inherit 'diff-removed)))
 
    ; modeline nad minibuffer
    '(minibuffer-noticeable-prompt ((t (:inherit font-lock-builtin-face :bold t))))

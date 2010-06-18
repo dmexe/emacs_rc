@@ -155,7 +155,7 @@
 ;;; - Untabify setup
 ;;;
 (require 'untabify-file)
-
+(add-to-list 'untabify-exclude-list 'ruby-mode)
 
 ;;; ---------------------------------------------------------
 ;;; - Uniqufy setup
@@ -173,9 +173,9 @@
 ;;;
 
 ;; to disable adaptive-history
-(condition-case nil
-    (delete-file "~/.emacs.d/anything-c-adaptive-history")
-  (error nil))
+;; (condition-case nil
+;;     (delete-file "~/.emacs.d/anything-c-adaptive-history")
+;;   (error nil))
 
 ;; (install-elisp-from-emacswiki "anything.el")
 (require 'anything)
@@ -215,15 +215,36 @@
     (volatile)
     (delayed)))
 
+(defvar anything-current-buffer nil)
+(defadvice anything (before get-current-buffer activate)
+  (setq anything-current-buffer (current-buffer)))
+
+(setq anything-c-source-rake-task
+  '((name . "Rake Task")
+    (candidates
+     . (lambda ()
+         (when (string-match "^rake" anything-pattern)
+           (cons '("rake" . "rake")
+                 (mapcar (lambda (line)
+                           (cons line (car (split-string line " +#"))))
+                         (with-current-buffer anything-current-buffer
+                           (split-string (shell-command-to-string "rake -T") "\n" t)))))))
+    (action ("Compile" . compile)
+            ("Compile with command-line edit"
+             . (lambda (c) (let ((compile-command (concat c " ")))
+                             (call-interactively 'compile)))))
+    (requires-pattern . 4)))
 
 (setq anything-sources
       (list
+;;       anything-c-source-rake-task
        anything-c-source-occur
-       anything-c-source-imenu
+;;       anything-c-source-imenu
        anything-c-source-file-name-history
-       anything-c-source-emacs-commands
-       anything-c-source-complex-command-history
-       anything-c-source-locate))
+;;;        anything-c-source-emacs-commands
+;;       anything-c-source-complex-command-history
+       anything-c-source-locate
+       ))
 
 ;;; ---------------------------------------------------------
 ;;; - Path for ruby-mode.el to generate correct imenu index

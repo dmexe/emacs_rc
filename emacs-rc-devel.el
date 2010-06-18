@@ -66,7 +66,7 @@
   (set (make-local-variable 'indent-tabs-mode) 'nil)
   (set (make-local-variable 'tab-width) 2)
   (set (make-local-variable 'c-basic-offset) 2)
-  (local-set-key (kbd "<return>") 'my-javadoc-return)
+  (local-set-key (kbd "<return>") 'my/javadoc-return)
   (local-set-key [f7] 'compile)
   (local-set-key (kbd "C-t") 'switch-cpp-h)
   (hs-minor-mode t))
@@ -192,15 +192,15 @@
                       "(setq-default yas/dont-activate t)(yas/initialize)")
   (byte-compile-file "~/.emacs.d/yasnippet/yasnippet-bundle.el"))
 
-(unless (file-exists-p "~/.emacs.d/yasnippet/yasnippet-bundle.el")
-  (my/compile-yasnippets))
+;; (unless (file-exists-p "~/.emacs.d/yasnippet/yasnippet-bundle.el")
+;;   (my/compile-yasnippets))
 
-(require 'yasnippet-bundle)
+;; (require 'yasnippet-bundle)
 
-;; (require 'yasnippet)
-;; (setq-default yas/dont-activate t)
-;; (yas/initialize)
-;; (yas/load-directory "~/.emacs.d/rc/snippets")
+(require 'yasnippet)
+(setq-default yas/dont-activate t)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/rc/snippets")
 
 (setq hippie-expand-try-functions-list
       (cons 'yas/hippie-try-expand hippie-expand-try-functions-list))
@@ -270,10 +270,23 @@
        (if (my/do-inside-yasnippet-p)
            t
          ;; completing
-         (when (looking-at "\\_>")
+         (when (or
+                (looking-at "\\_>")
+                (looking-back "\<")) ;; special for html '<' snippet
            (hippie-expand nil)
            t))))
     (unless (and run
                  (get major-mode 'indent-or-complete))
       ;; always indent line
       ad-do-it)))
+
+;;; ---------------------------------------------------------
+;;; - Auto run smerge
+;;;
+(defun my/try-smerge ()
+  (save-excursion
+    (goto-char (point-min))
+    (when (re-search-forward "^<<<<<<< " nil t)
+      (smerge-mode 1))))
+
+(add-hook 'find-file-hook 'sm-try-smerge t)

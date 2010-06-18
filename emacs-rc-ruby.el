@@ -115,6 +115,7 @@ See the variable `align-rules-list' for more details.")
 ;;; - Rails
 ;;;
 (setq load-path (cons (expand-file-name "~/.emacs.d/rails-reloaded") load-path))
+(defvar rails/ruby/command "/opt/local/bin/ruby")
 (require 'rails-autoload)
 
 
